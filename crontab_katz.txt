@@ -1,0 +1,2 @@
+* * * * *       /usr/bin/webcam_control.py
+*/17 * * * *	/home/pi/boga/boga_timelapse.sh
