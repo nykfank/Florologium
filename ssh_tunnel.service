@@ -1,0 +1,12 @@
+[Unit]
+Description=Persistent reverse SSH tunnel
+After=network.target
+
+[Service]
+Restart=on-failure
+RestartSec=5
+ExecStart=/usr/bin/ssh -N -o ServerAliveInterval=60 -o ExitOnForwardFailure=yes -R 9091:localhost:22 tunnel@nyk.ch
+User=nyk
+ 
+[Install]
+WantedBy=multi-user.target
