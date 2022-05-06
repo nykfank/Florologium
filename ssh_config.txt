@@ -1,0 +1,8 @@
+Host flortun
+HostName localhost
+Port 9091
+User pi
+
+Host flor
+HostName 192.168.1.40
+User nyk
