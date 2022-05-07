@@ -1,4 +1,18 @@
 <script>
+fetch("https://www.florologium.ch/content_foto.html")
+.then((result) => { return result.text(); })
+.then((content) => { document.getElementById("upd").innerHTML = content; });       
+</script>
+<div id="upd">&nbsp;</div>
+
+<script>
+fetch("https://www.florologium.ch/content_video.html")
+.then((result) => { return result.text(); })
+.then((content) => { document.getElementById("upd").innerHTML = content; });       
+</script>
+<div id="upd">&nbsp;</div>
+
+<script>
 fetch("https://www.florologium.ch/content_video7.html")
 .then((result) => { return result.text(); })
 .then((content) => { document.getElementById("upd").innerHTML = content; });       
