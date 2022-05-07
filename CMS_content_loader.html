@@ -1,0 +1,7 @@
+<script>
+fetch("https://www.florologium.ch/content_video.html")
+.then((result) => { return result.text(); })
+.then((content) => { document.getElementById("upd").innerHTML = content; });       
+</script>
+<div id="upd">&nbsp;</div>
+
