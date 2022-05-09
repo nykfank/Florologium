@@ -1,14 +1,11 @@
 #!/usr/bin/python3
 import sys, subprocess, re, os, time
 filename = sys.argv[1]
+current_path = '/var/www/florologium/nikon_current.jpg'
 html_path = '/var/www/florologium/content_foto.html'
-if not os.path.isfile(filename): 
-	print('File does not exist: %s' % filename)
-	sys.exit()
-cmd = 'exiftool', filename
+cmd = 'exiftool', current_path
 r = subprocess.check_output(cmd)
-r = r.decode('ascii')
-rsp = r.split('\n')
+rsp = r.decode('ascii').split('\n')
 r2 = filter(lambda x : x.startswith('Exposure Time'), rsp)
 exp_time = list(r2)[0]
 exp_time = re.sub(' +', ' ', exp_time)
