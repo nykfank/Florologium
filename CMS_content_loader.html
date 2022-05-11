@@ -19,3 +19,9 @@ fetch("content_video7.html")
 </script>
 <div id="upd">&nbsp;</div>
 
+<script>
+fetch("https://www.florologium.ch/content_video30.html")
+.then((result) => { return result.text(); })
+.then((content) => { document.getElementById("upd").innerHTML = content; });       
+</script>
+<div id="upd">&nbsp;</div>
