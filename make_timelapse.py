@@ -19,6 +19,6 @@ else:
 	for f in os.listdir(outdir): os.unlink('%s/%s' % (outdir, f))
 for f in files[start_index:]:
 	os.symlink('%s/%s' % (indir, f), '%s/%s' % (outdir, f))
-cmd = "ffmpeg -y -hide_banner -framerate %d -pattern_type glob -i '%s/*.jpg' -c:v libx264 -strict -2 -pix_fmt yuv420p -f mp4 %s" % (fps, outdir, vidfile)
+cmd = "ffmpeg -y -hide_banner -loglevel panic -framerate %d -pattern_type glob -i '%s/*.jpg' -c:v libx264 -strict -2 -pix_fmt yuv420p -f mp4 %s" % (fps, outdir, vidfile)
 print(cmd)
 r = os.popen(cmd)
