@@ -12,7 +12,7 @@ if [ ! $? -eq 0 ]; then
 fi
 filesize=$(ssh flortun stat -c%s "capt0000.jpg")
 if [[ $filesize -lt 10000000 ]]; then
-	echo 'Filesize below 10MB, use bulb mode!'
+    echo 'Filesize below 10MB, use bulb mode!'
     ssh flortun rm capt0000.jpg
     sleep 5
     ssh flortun gphoto2 --set-config iso=8000 --capture-image-and-download --force-overwrite --bulb 30
