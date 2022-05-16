@@ -15,7 +15,7 @@ if [[ $filesize -lt 10000000 ]]; then
 	echo 'Filesize below 10MB, use bulb mode!'
     ssh flortun rm capt0000.jpg
     sleep 5
-	ssh flortun gphoto2 --set-config iso=8000 --capture-image-and-download --force-overwrite --bulb 30
+    ssh flortun gphoto2 --set-config iso=8000 --capture-image-and-download --force-overwrite --bulb 30
 fi
 rsync flortun:capt0000.jpg /var/www/florologium/nikon/$filename
 if [[ ! -f /var/www/florologium/nikon/$filename ]] ; then
