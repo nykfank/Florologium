@@ -7,7 +7,7 @@ fi
 ssh flortun gphoto2 --capture-image-and-download --force-overwrite
 ssh flortun "test -e capt0000.jpg"
 if [ ! $? -eq 0 ]; then
-	echo 'No foto taken.'
+	echo 'No foto.'
 	exit
 fi
 filesize=$(ssh flortun stat -c%s "capt0000.jpg")
@@ -16,6 +16,11 @@ if [[ $filesize -lt 10000000 ]]; then
     ssh flortun rm capt0000.jpg
     sleep 5
     ssh flortun gphoto2 --set-config iso=8000 --capture-image-and-download --force-overwrite --bulb 30
+    ssh flortun "test -e capt0000.jpg"
+    if [ ! $? -eq 0 ]; then
+        echo 'No bulb foto.'
+        exit
+    fi
 fi
 rsync flortun:capt0000.jpg /var/www/florologium/nikon/$filename
 if [[ ! -f /var/www/florologium/nikon/$filename ]] ; then
