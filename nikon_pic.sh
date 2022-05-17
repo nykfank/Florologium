@@ -27,7 +27,7 @@ fi
 ssh flor "test -e nikon_current.jpg"
 if [[ $? -eq 0 ]]; 
 then
-	ssh flor rm ~/nikon_current.jpg
+	ssh flor rm nikon_current.jpg
 fi
 ssh flor convert -geometry 696x464 nikon/$filename nikon_current.jpg
 ssh flor "test -e nikon_current.jpg"
