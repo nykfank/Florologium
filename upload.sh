@@ -1,8 +1,8 @@
 #!
-rsync -vp ~/boga/nikon_pic.sh katz:boga
-rsync -vp ~/boga/bulb_mode.py katz:boga
-rsync -vp ~/boga/nikon_publish.py katz:boga
-rsync -vp ~/boga/boga_timelapse.sh katz:boga
-rsync -vp ~/boga/exposure_timelapse.R flor:bin
-rsync -vp ~/boga/make_timelapse.py flor:bin
-rsync -vp ~/boga/wan_update.sh katz:boga
+rsync -vp ~/Florologium/nikon_pic.sh katz:boga
+rsync -vp ~/Florologium/bulb_mode.py katz:boga
+rsync -vp ~/Florologium/nikon_publish.py katz:boga
+rsync -vp ~/Florologium/boga_timelapse.sh katz:boga
+rsync -vp ~/Florologium/exposure_timelapse.R flor:bin
+rsync -vp ~/Florologium/make_timelapse.py flor:bin
+rsync -vp ~/Florologium/wan_update.sh katz:boga
