@@ -6,11 +6,12 @@ then
 	ssh flortun rm capt0000.jpg
 fi
 bulbmode=$(~/boga/bulb_mode.py)
-if [[ $bulbmode -eq 0 ]]; 
+if [[ $bulbmode -gt 0 ]]; 
 then
-    ssh flortun gphoto2 --capture-image-and-download --force-overwrite
+    ssh flortun gphoto2 --set-config iso=8000 --capture-image-and-download --force-overwrite --bulb $bulbmode
+
 else
-    ssh flortun gphoto2 --set-config iso=8000 --capture-image-and-download --force-overwrite --bulb 30
+    ssh flortun gphoto2 --capture-image-and-download --force-overwrite
 fi
 ssh flortun "test -e capt0000.jpg"
 if [[ ! $? -eq 0 ]]; 
