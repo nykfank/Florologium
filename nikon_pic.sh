@@ -9,7 +9,6 @@ bulbmode=$(~/boga/bulb_mode.py)
 if [[ $bulbmode -gt 0 ]]; 
 then
     ssh flortun gphoto2 --set-config iso=8000 --capture-image-and-download --force-overwrite --bulb $bulbmode
-
 else
     ssh flortun gphoto2 --capture-image-and-download --force-overwrite
 fi
