@@ -12,8 +12,8 @@ current_time = datetime.datetime.now().astimezone()
 #print("dawn", s["dawn"])
 #print("dusk", s["dusk"])
 delta = 0
-if current_time < s["dawn"]:	delta = (s["dawn"] - current_time).seconds
-if current_time > s["dusk"]:	delta = (current_time- s["dusk"]).seconds
+if current_time < s["dawn"]: delta = (s["dawn"] - current_time).seconds
+if current_time > s["dusk"]: delta = (current_time- s["dusk"]).seconds
 exposure = max_exposure_seconds * delta / transition_seconds
 if exposure > 30: exposure = 30
 print(int(exposure))
