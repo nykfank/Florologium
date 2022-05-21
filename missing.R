@@ -6,7 +6,7 @@ end_time_day <- as.POSIXct(strftime(Sys.time(), "%Y-%m-%d 23:55:01"))
 optab <- data.frame(time=seq(from=start_time_day, by=5*60, to=end_time_day))
 fotab$key <- strftime(fotab$time, "%Y%m%d_%H%M")
 optab$key <- strftime(optab$time, "%Y%m%d_%H%M")
-misstab <- merge(optab, fotab, all.x=TRUE)
+misstab <- merge(optab, fotab[,c("key", "filename")], all.x=TRUE, by="key")
 misstab <- misstab[order(misstab$time),]
 misstab$ok <- 0
 misstab[!is.na(misstab$filename), "ok"] <- 1
