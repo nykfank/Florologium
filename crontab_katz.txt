@@ -1,5 +1,5 @@
 * * * * *       /usr/bin/webcam_control.py
 21 * * * *	/home/pi/boga/boga_timelapse.sh
 */5 * * * *	/home/pi/boga/nikon_pic.sh
-1 * * * *	/home/pi/boga/wan_update.sh
-
+*/30 * * * *    /home/pi/boga/wan_update.sh
+5 * * * *	/home/pi/boga/run_missing.sh

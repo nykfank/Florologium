@@ -1,4 +1,4 @@
-fotab <- data.frame(filename=list.files("nikon"))
+fotab <- data.frame(filename=list.files("~/nikon"))
 fotab$time <- strptime(fotab$filename, "%Y%m%d_%H%M%S.jpg")
 start_time <- min(fotab$time)
 start_time_day <- as.POSIXct(strftime(start_time, "%Y-%m-%d 00:00:01"))
