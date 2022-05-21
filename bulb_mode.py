@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # Returns seconds of exposure for bulb mode or 0 for automatic.
-transition_seconds = 60 * 60
-max_exposure_seconds = 30
+transition_seconds = 60 * 90
+max_exposure_seconds = 60
 import astral, astral.sun, datetime
 # Set location of Botanical Gardens Bern and its local timezone.
 loc = astral.LocationInfo(timezone='Europe/Zurich', latitude=46.95263, longitude=7.44545)
@@ -14,5 +14,5 @@ if current_time > s["dusk"]: delta = (current_time - s["dusk"]).seconds
 exposure = max_exposure_seconds * delta / transition_seconds
 if exposure > 30: exposure = 30
 if exposure < 0: exposure = 0
-if exposure > 0 and exposure < 3: exposure = 3
+if exposure > 0 and exposure < 2: exposure = 2
 print(int(exposure))
