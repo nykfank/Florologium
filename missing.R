@@ -14,7 +14,7 @@ misstab$date <- strftime(misstab$time, "%Y-%m-%d")
 misstab$index <- rep(1:(24*60/interval), length(unique(misstab$date)))
 misstab$hour <- 24 * (misstab$index - 1 ) / (24*60/interval)
 p <- ggplot2::ggplot(data = misstab, ggplot2::aes(x=hour, y=date, fill=ok, color=ok)) + 
-  ggplot2::geom_tile() + ggplot2::theme_minimal()
+  ggplot2::geom_tile() + ggplot2::theme_minimal() +
   ggplot2::theme(legend.position = "none") +
   ggplot2::xlab(NULL) + ggplot2::ylab(NULL) +
   ggplot2::scale_x_continuous(limits = c(0, 24), breaks = 0:23)
