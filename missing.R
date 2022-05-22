@@ -18,7 +18,6 @@ p <- ggplot2::ggplot(data = misstab, ggplot2::aes(x=hour, y=date, fill=ok, color
   ggplot2::theme(legend.position = "none") +
   ggplot2::xlab(NULL) + ggplot2::ylab(NULL) +
   ggplot2::scale_x_continuous(limits = c(0, 24), breaks = 0:23)
-#png("~/missing_dayplot.png", width=640, height=480)
 svg("~/missing_dayplot.svg")
 print(p)
 dev.off()
