@@ -8,8 +8,7 @@ fotab$key <- strftime(fotab$time, "%Y%m%d_%H%M")
 optab$key <- strftime(optab$time, "%Y%m%d_%H%M")
 misstab <- merge(optab, fotab[,c("key", "filename")], all.x=TRUE, by="key")
 misstab <- misstab[order(misstab$time),]
-misstab$ok <- 0
-misstab[!is.na(misstab$filename), "ok"] <- 1
+misstab$ok <- as.numeric(!is.na(misstab$filename))
 misstab$date <- strftime(misstab$time, "%Y-%m-%d")
 misstab$index <- rep(1:(24*60/interval), length(unique(misstab$date)))
 misstab$hour <- 24 * (misstab$index - 1 ) / (24*60/interval)
