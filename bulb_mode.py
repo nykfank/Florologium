@@ -4,16 +4,16 @@
 transition_seconds = 60 * 90
 max_exposure_seconds = 60
 import astral, astral.sun, datetime
-# Set location of Botanical Gardens Bern and its local timezone.
+# Location of Botanical Gardens Bern and its local timezone.
 loc = astral.LocationInfo(timezone='Europe/Zurich', latitude=46.95263, longitude=7.44545)
-# Get sun data for this location/timezone.
 s = astral.sun.sun(loc.observer, tzinfo=loc.timezone)
+dusk = s["dusk"] + datetime.timedelta(minutes=5)
+dawn = s["dawn"] - datetime.timedelta(minutes=5)
 current_time = datetime.datetime.now().astimezone()
 delta = 0
-if current_time < s["dawn"]: delta = (s["dawn"] - current_time).seconds
-if current_time > s["dusk"]: delta = (current_time - s["dusk"]).seconds
+if current_time < dawn: delta = (dawn - current_time).seconds
+if current_time > dusk: delta = (current_time - dusk).seconds
 exposure = max_exposure_seconds * delta / transition_seconds
-if exposure > 30: exposure = 30
-if exposure < 0: exposure = 0
+if exposure > 25: exposure = 25
 if exposure > 0 and exposure < 5: exposure = 5
 print(int(exposure))

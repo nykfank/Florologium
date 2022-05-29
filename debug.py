@@ -8,5 +8,14 @@
 #gplots::heatmap.2(daymat, dendrogram='none', Rowv=FALSE, Colv=FALSE, trace='none', key=FALSE, col=c("black", "green"))
 #melted_daymat <- reshape2::melt(t(daymat))
 
+<<<<<<< HEAD
 dawn = s["dawn"] + datetime.relativedelta(minutes=15)
 dusk = s["dusk"] - datetime.timedelta(hours=0, minutes=15)
+=======
+#
+x = current_time = datetime.datetime(2022, 5, 19, 22, 30, 0).astimezone()
+#print("dawn", s["dawn"])
+#print("dusk", s["dusk"])
+dusk = s["dusk"] - datetime.timedelta(minutes=15)
+dawn = s["dawn"] + datetime.timedelta(minutes=15)
+>>>>>>> 237890e1dfa1868a9ae88d3c07ea6f339bb9cc70
