@@ -12,7 +12,8 @@ misstab$ok <- as.numeric(!is.na(misstab$filename))
 misstab$date <- strftime(misstab$time, "%Y-%m-%d")
 misstab$index <- rep(1:(24*60/interval), length(unique(misstab$date)))
 misstab$hour <- 24 * (misstab$index - 1 ) / (24*60/interval)
-misstab2 <- misstab[misstab$time > min(fotab$time) & misstab$time < Sys.time(),]
+misstab2 <- misstab[misstab$time > min(fotab$time) & misstab$time < Sys.time() & misstab$date > Sys.Date() - 14,]
+#misstab2 <- misstab[misstab$time < Sys.time() & misstab$date > Sys.Date() - 14,]
 percent_complete <- 100 * sum(misstab2$ok) / nrow(misstab2)
 p <- ggplot2::ggplot(data = misstab2, ggplot2::aes(x=hour, y=date, fill=ok)) + 
   ggplot2::geom_tile() + ggplot2::theme_minimal() +
