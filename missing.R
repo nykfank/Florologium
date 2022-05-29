@@ -12,10 +12,13 @@ misstab$ok <- as.numeric(!is.na(misstab$filename))
 misstab$date <- strftime(misstab$time, "%Y-%m-%d")
 misstab$index <- rep(1:(24*60/interval), length(unique(misstab$date)))
 misstab$hour <- 24 * (misstab$index - 1 ) / (24*60/interval)
-p <- ggplot2::ggplot(data = misstab, ggplot2::aes(x=hour, y=date, fill=ok)) + 
+percent_complete <- 100 * sum(misstab2$ok) / nrow(misstab2)
+misstab2 <- misstab[misstab$time > min(fotab$time) & misstab$time < Sys.time(),]
+p <- ggplot2::ggplot(data = misstab2, ggplot2::aes(x=hour, y=date, fill=ok)) + 
   ggplot2::geom_tile() + ggplot2::theme_minimal() +
   ggplot2::theme(legend.position = "none") + ggplot2::xlab(NULL) + ggplot2::ylab(NULL) +
-  ggplot2::scale_x_continuous(limits = c(0, 24), breaks = 0:23)
+  ggplot2::scale_x_continuous(limits = c(0, 24), breaks = 0:23) + 
+  ggplot2::ggtitle(sprintf("%2.2f%%", percent_complete))
 svg("~/missing_dayplot.svg")
 print(p)
 dev.off()

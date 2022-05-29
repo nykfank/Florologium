@@ -7,3 +7,6 @@
 #rownames(daymat) <- unique(misstab$date)
 #gplots::heatmap.2(daymat, dendrogram='none', Rowv=FALSE, Colv=FALSE, trace='none', key=FALSE, col=c("black", "green"))
 #melted_daymat <- reshape2::melt(t(daymat))
+
+dawn = s["dawn"] + datetime.relativedelta(minutes=15)
+dusk = s["dusk"] - datetime.timedelta(hours=0, minutes=15)
