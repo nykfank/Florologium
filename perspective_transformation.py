@@ -2,11 +2,12 @@ import cv2
 from operator import itemgetter
 from glob import glob
 import numpy as np
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 paper = cv2.imread('nikon_current.jpg')
 # Coordinates that you want to Perspective Transform
-pts1 = np.float32([[1,136],[348,1],[320,464],[696,205]])
+#pts1 = np.float32([[1,136],[348,1],[320,464],[696,205]])
+pts1 = np.float32([[100, 0],[696-100, 0],[-100, 464],[696+100,464]])
 # Size of the Transformed Image
 pts2 = np.float32([[0,0],[696,0],[0,464],[696,464]])
 for val in pts1:
