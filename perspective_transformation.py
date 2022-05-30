@@ -1,18 +1,16 @@
-import cv2
-from operator import itemgetter
-from glob import glob
-import numpy as np
-#import matplotlib.pyplot as plt
+import cv2, numpy, sys
 
-paper = cv2.imread('nikon_current.jpg')
-# Coordinates that you want to Perspective Transform
-#pts1 = np.float32([[1,136],[348,1],[320,464],[696,205]])
-pts1 = np.float32([[100, 0],[696-100, 0],[-100, 464],[696+100,464]])
-# Size of the Transformed Image
-pts2 = np.float32([[0,0],[696,0],[0,464],[696,464]])
-for val in pts1:
-    cv2.circle(paper,(val[0],val[1]),5,(0,255,0),-1)
-M = cv2.getPerspectiveTransform(pts1,pts2)
-dst = cv2.warpPerspective(paper,M,(696,464))
-#plt.imshow(dst)
-cv2.imwrite("foo.jpg", dst)
+mult = 8 # Size multiplier [8 = full, 1 = scaled for web].
+sx = 696*mult # Size horizontal
+sy = 464*mult # Size vertical
+d1 = 150*mult # Top trapezoid points distance to border.
+d2 = 250*mult # Shift outside image.
+d3 = 120*mult # Crop distance.
+
+paper = cv2.imread(sys.argv[1])
+pts1 = numpy.float32([[d1-d2, 0], [sx-d1+d2, 0], [-d2, sy], [sx+d2, sy]])
+pts2 = numpy.float32([[0, 0], [sx, 0], [0, sy], [sx, sy]])
+M = cv2.getPerspectiveTransform(pts1, pts2)
+dst = cv2.warpPerspective(paper, M, (sx,sy), cv2.BORDER_TRANSPARENT)
+crop_img = dst[0:sy, d3:sx-d3]
+cv2.imwrite(sys.argv[2], crop_img)

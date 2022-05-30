@@ -14,6 +14,6 @@ delta = 0
 if current_time < dawn: delta = (dawn - current_time).seconds
 if current_time > dusk: delta = (current_time - dusk).seconds
 exposure = max_exposure_seconds * delta / transition_seconds
-if exposure > 25: exposure = 25
+if exposure > 30: exposure = 30
 if exposure > 0 and exposure < 5: exposure = 5
 print(int(exposure))
