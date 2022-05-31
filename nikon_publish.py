@@ -14,6 +14,6 @@ zeit = os.path.splitext(os.path.basename(filename))[0]
 zeit2 = '%s-%s-%s %s:%s' % (zeit[0:4], zeit[4:6], zeit[6:8], zeit[9:11], zeit[11:13])
 html_text = """<p><img alt="Current picture of Florologium" src="https://www.florologium.ch/nikon_current.jpg?%d" style="width: 696px; height: 464px;" />
 <br/>%s, %s s</p><p>
-<img alt="Transformed picture of Florologium" src="https://www.florologium.ch/nikon_current795t.jpg?%d" style="width: 569px; height: 530px;" />
+<img alt="Transformed picture of Florologium" src="https://www.florologium.ch/nikon_current795t.jpg?%d" style="width: 597px; height: 530px;" />
 <br/><center>Perspective transformed image.</center></p>""" % (time.time(), zeit2, exp_time, time.time())
 open(html_path, 'w').write(html_text)
