@@ -6,10 +6,10 @@ sy = paper.shape[0]
 sx = paper.shape[1]
 d1 = int(sx / 3.5) # Top trapezoid points distance to border.
 d2 = int(sx / 3) # Shift outside image.
-d3 = int(sx / 9) # Crop distance.
+d3 = int(sx / 9) # Crop distance from left/right side of transformed image.
 pts1 = numpy.float32([[d1-d2, 0], [sx-d1+d2, 0], [-d2, sy], [sx+d2, sy]])
 pts2 = numpy.float32([[0, 0], [sx, 0], [0, sy], [sx, sy]])
 M = cv2.getPerspectiveTransform(pts1, pts2)
 dst = cv2.warpPerspective(paper, M, (sx,sy), flags=cv2.INTER_LINEAR, borderValue=bgColor)
-crop_img = dst[0:sy, d3:sx-d3]
+crop_img = dst[0:sy, d3:sx-d3] # Remove border of d3 pixel at each side of transformed image.
 cv2.imwrite(sys.argv[2], crop_img)
