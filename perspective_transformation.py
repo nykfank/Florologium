@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import cv2, numpy, sys
 paper = cv2.imread(sys.argv[1])
 sy = paper.shape[0]
