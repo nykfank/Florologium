@@ -18,6 +18,6 @@ open(html_path, 'w').write(html_text)
 
 # Perspective transformed version
 html_path_pt = '/var/www/florologium/content_foto_pt.html'
-html_text_pt = """<p><img alt="Transformed picture of Florologium" src="https://www.florologium.ch/nikon_current795t.jpg?%d" style="width: 696px; height: 464px;" />
+html_text_pt = """<p><img alt="Transformed picture of Florologium" src="https://www.florologium.ch/nikon_current795t.jpg?%d" style="width: 619px; height: 530px;" />
 <br/>%s, %s s</p>""" % (time.time(), zeit2, exp_time)
 open(html_path_pt, 'w').write(html_text_pt)
