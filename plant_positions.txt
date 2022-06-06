@@ -1,0 +1,3 @@
+Species_Name	X_Coordinate	Y_Coordinate	Start_hour	End_hour
+Gazania	2200	3100	11	19
+Delosperma	2100	1777	11	16
