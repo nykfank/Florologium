@@ -31,7 +31,7 @@ then
 fi
 ssh flor convert -geometry 696x464 nikon/$filename nikon_current.jpg
 ssh flor convert -geometry 795x530 nikon/$filename nikon_current795.jpg
-ssh flor bin/perspective_transformation.py nikon_current795.jpg nikon_current795t.jpg
+ssh flor Florologium/perspective_transformation.py nikon_current795.jpg nikon_current795t.jpg
 ssh flor "test -e nikon_current.jpg"
 if [[ ! $? -eq 0 ]]; 
 then

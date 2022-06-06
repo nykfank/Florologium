@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 # Returns seconds of exposure for bulb mode or 0 for automatic.
-# TODO: dusk - 15min, dawn + 15 min
 transition_seconds = 60 * 90
 max_exposure_seconds = 60
 import astral, astral.sun, datetime

@@ -17,7 +17,7 @@ for p in photos:
     print(' '.join(cmd))
     r = subprocess.call(cmd)
     zeit2 = '%s-%s-%s %s:%s' % (p[0:4], p[4:6], p[6:8], p[9:11], p[11:13])
-    cmd = '/home/nyk/bin/date_to_image.py', p2, zeit2
+    cmd = 'Florologium/date_to_image.py', p2, zeit2
     print(' '.join(cmd))
     r = subprocess.call(cmd)
 
