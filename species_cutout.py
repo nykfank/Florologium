@@ -20,10 +20,12 @@ for Species_Name, (X_Coordinate, Y_Coordinate, Start_hour, End_hour) in specd.it
     outfilename = '%s/%s.jpg' % (outdir, Species_Name)
     cv2.imwrite(outfilename, crop_img)
 
+html = ''
+for Species_Name, (X_Coordinate, Y_Coordinate, Start_hour, End_hour) in specd.items():
+    html += '<p><strong>%s (%dh - %dh)</strong><br/>\n' % (Species_Name, Start_hour, End_hour)
+    html += '<img src="%s/%s.jpg" width="%d" height="%d" alt="%s"/></p>' % (outurl, Species_Name, xsize, ysize, Species_Name)
 zeit = os.path.splitext(os.path.basename(sys.argv[1]))[0]
 zeit2 = '%s-%s-%s %s:%s' % (zeit[0:4], zeit[4:6], zeit[6:8], zeit[9:11], zeit[11:13])
-html = '<h2>Flower closeups at %s</h2>' % zeit2
-for Species_Name, (X_Coordinate, Y_Coordinate, Start_hour, End_hour) in specd.items():
-    html += '<p><strong>%s (%dh - %dh)<br/>\n' % (Species_Name, Start_hour, End_hour)
-    html += '<img src="%s/%s.jpg" width="%d" height="%d" alt="%s"/></p>' % (outurl, Species_Name, xsize, ysize, Species_Name)
+html += '<p>Picture taken at %s</p>' % zeit2
+
 open(outfile_html, 'w').write(html)
