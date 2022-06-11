@@ -30,8 +30,6 @@ then
 	ssh flor rm nikon_current.jpg
 fi
 ssh flor convert -geometry 696x464 nikon/$filename nikon_current.jpg
-ssh flor convert -geometry 795x530 nikon/$filename nikon_current795.jpg
-ssh flor Florologium/perspective_transformation.py nikon_current795.jpg nikon_current795t.jpg
 ssh flor "test -e nikon_current.jpg"
 if [[ ! $? -eq 0 ]]; 
 then
@@ -40,4 +38,8 @@ then
 fi
 rsync flor:nikon_current.jpg /var/www/florologium/nikon_current.jpg
 rsync flor:nikon_current795t.jpg /var/www/florologium/nikon_current795t.jpg
+ssh flor convert -geometry 795x530 nikon/$filename nikon_current795.jpg
+ssh flor Florologium/perspective_transformation.py nikon_current795.jpg nikon_current795t.jpg
 ~/boga/nikon_publish.py $filename
+ssh flor Florologium/species_cutout.py nikon/$filename
+rsync -r flor:cutout /var/www/florologium/

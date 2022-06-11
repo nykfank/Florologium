@@ -1,6 +1,6 @@
 Species_Name	X_Coordinate	Y_Coordinate	Start_hour	End_hour
 Centaurium	3300	3250	10	18
-Gazania	2200	3100	11	19
-Delosperma	2100	1777	11	16
-Ipomea	3400	1700	11	12
-Helianthemum	2500	1500	7	18
+Gazania	2200	3150	11	19
+Delosperma	2000	1720	11	16
+Ipomea	3400	1650	11	12
+Helianthemum	2500	1480	7	18

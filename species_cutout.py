@@ -2,9 +2,10 @@
 import cv2, numpy, sys, os
 data_file = "%s/Florologium/plant_positions.txt" % os.environ['HOME']
 outdir = '%s/cutout' % os.environ['HOME']
+outurl = 'https://www.florologium.ch/cutout'
 outfile_html = '%s/cutout/table.html' % os.environ['HOME']
-xsize = 320
-ysize = 240
+xsize = 400
+ysize = 300
 img = cv2.imread(sys.argv[1])
 if not os.path.isdir(outdir): os.mkdir(outdir)
 
@@ -19,9 +20,10 @@ for Species_Name, (X_Coordinate, Y_Coordinate, Start_hour, End_hour) in specd.it
     outfilename = '%s/%s.jpg' % (outdir, Species_Name)
     cv2.imwrite(outfilename, crop_img)
 
-html = '<table><tr><th>Picture</th><th>Species</th><th>Flowering</th></tr>\n'
+zeit = os.path.splitext(os.path.basename(sys.argv[1]))[0]
+zeit2 = '%s-%s-%s %s:%s' % (zeit[0:4], zeit[4:6], zeit[6:8], zeit[9:11], zeit[11:13])
+html = '<h2>Flower closeups at %s</h2>' % zeit2
 for Species_Name, (X_Coordinate, Y_Coordinate, Start_hour, End_hour) in specd.items():
-    html += '<tr><td><img src="%s.jpg" width="%d" height="%d" alt="%s"/></td>' % (Species_Name, xsize, ysize, Species_Name)
-    html += '<td>%s</td><td>%dh - %dh</td></tr>\n' % (Species_Name, Start_hour, End_hour)
-html += '</tr></table>'
+    html += '<p><strong>%s (%dh - %dh)<br/>\n' % (Species_Name, Start_hour, End_hour)
+    html += '<img src="%s/%s.jpg" width="%d" height="%d" alt="%s"/></p>' % (outurl, Species_Name, xsize, ysize, Species_Name)
 open(outfile_html, 'w').write(html)
