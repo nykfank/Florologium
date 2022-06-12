@@ -24,7 +24,7 @@ for Species_Name, (X_Coordinate, Y_Coordinate, Start_hour, End_hour) in specd.it
     crop_img = img[Y_Coordinate:Y_Coordinate+ysize, X_Coordinate:X_Coordinate+xsize]
     outfilename = '%s/%s.jpg' % (outdir, Species_Name)
     cv2.imwrite(outfilename, crop_img)
-    img = cv2.rectangle(img, (X_Coordinate, Y_Coordinate), (X_Coordinate+xsize, Y_Coordinate+ysize), (0,0,255), 10)
+    img = cv2.rectangle(img, (X_Coordinate, Y_Coordinate), (X_Coordinate+xsize, Y_Coordinate+ysize), (0,0,255), 20)
 img_small = cv2.resize(img, (xsize_marked, ysize_marked), interpolation = cv2.INTER_AREA)
 cv2.imwrite(outfile_marked, img_small)
 
