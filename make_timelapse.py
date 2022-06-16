@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 # TODO: Add all-time timelapse with images selected by exposure time!
+# TODO: Separate day/night!
+
 import sys, os, time
 nb_days = int(sys.argv[1])
 indir = '/home/nyk/nikon_696x464'
