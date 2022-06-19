@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # TODO: Add all-time timelapse with images selected by exposure time!
-# TODO: Separate day/night!
+# TODO: Separate day/night! -> Automate nikon_exposure.py first!
 
 import sys, os, time
 nb_days = int(sys.argv[1])
