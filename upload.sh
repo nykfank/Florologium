@@ -13,5 +13,6 @@ rsync -p ~/Florologium/crontab_katz.txt katz:.
 rsync -p ~/Florologium/perspective_transformation.py flor:Florologium
 rsync -p ~/Florologium/species_cutout.py flor:Florologium
 rsync -p ~/Florologium/plant_positions.txt flor:Florologium
+rsync -p ~/Florologium/nikon_exposure.py flor:Florologium
 
 #rsync -vp ~/Florologium/wan_update.sh katz:boga

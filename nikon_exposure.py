@@ -1,9 +1,15 @@
 #!/usr/bin/python3
-import sys, subprocess, re, os, time
+import subprocess, os
 foto_dir = '/home/nyk/nikon'
 outfilename = '/home/nyk/exposure_times.txt'
-open(outfilename, 'w')
+filed = {}
+for i in open(outfilename).readlines():
+	f, et = i.strip().split('\t')
+	filed[f] = et
+print('Loaded: %d' % len(filed))
+count = 0
 for f in os.listdir(foto_dir):
+	if f in filed: continue
 	cmd = 'exiftool', '%s/%s' % (foto_dir, f)
 	r = subprocess.check_output(cmd)
 	r = r.decode('ascii')
@@ -14,4 +20,5 @@ for f in os.listdir(foto_dir):
 	outrow = '%s\t%f' % (f, et)
 	print(outrow)
 	open(outfilename, 'a').write(outrow + '\n')
-	
+	count += 1
+print('New: %d' % count)
