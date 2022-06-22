@@ -1,4 +1,5 @@
 #!
+ssh flor Florologium/nikon_exposure.py
 ssh flor Florologium/scale_images.py nikon 696 464
 ssh flor Florologium/make_timelapse.py 1
 ssh flor Florologium/make_timelapse.py 7
