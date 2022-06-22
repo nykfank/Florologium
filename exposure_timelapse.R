@@ -1,18 +1,30 @@
+args <- commandArgs(trailingOnly=TRUE)
+nb_days <- as.integer(args[1])
+use_daytime <- 1
+movie_seconds <- 30
+fps <- 20
+indir <- '/home/nyk/nikon_696x464'
+outdir <- sprintf('/home/nyk/nikon_696x464_%d', nb_days)
+vidfile <- sprintf('/home/nyk/video/nikon_timelapse%d.mp4', nb_days)
+if (!dir.exists(outdir)) {
+	dir.create(outdir)
+} else {
+	for (f in list.files(outdir)) unlink(sprintf("%s/%s", outdir, f))
+}
 et <- read.table("/home/nyk/exposure_times.txt")
 colnames(et) <- c("filename", "exp_time")
 et$timestamp <- strptime(et$filename, "%Y%m%d_%H%M%S")
 et <- et[order(et$timestamp),]
 et$date <- as.Date(et$timestamp)
-et$lexp <- log(et$exp_time)
-etday <- et[et$timestamp > Sys.time() - 24*3600,]
-etweek <- et[et$timestamp > Sys.time() - 7*24*3600,]
+subet <- et[et$timestamp > Sys.time() - nb_days*24*3600,]
+subet <- subet[order(subet$exp_time, decreasing=TRUE),]
+if (use_daytime == 1) subet <- subet[subet$exp_time < 0.01,] else subet <- subet[subet$exp_time > 1,]
+subet <- subet[1:(movie_seconds*fps),]
+subet <- subet[order(subet$timestamp, decreasing=FALSE),]
+for (f in subet$filename) {
+	file.copy(sprintf("%s/%s", indir, f), sprintf("%s/%s", outdir, f))
+}
+cmd <- sprintf("ffmpeg -y -hide_banner -loglevel panic -framerate %d -pattern_type glob -i '%s/*.jpg' -c:v libx264 -strict -2 -pix_fmt yuv420p -f mp4 %s", fps, outdir, vidfile)
+writeLines(cmd)
+system(cmd)
 
-png("/home/nyk/exptime1.png", width=696, height=320)
-plot(etday$timestamp, etday$lexp, xlab="Time", ylab="Log of exposure time [s]", main=sprintf("Exposure times at %s", etday$date[nrow(etday)]))
-lines(etday$timestamp, etday$lexp)
-dev.off()
-
-png("/home/nyk/exptime7.png", width=696, height=320)
-plot(etweek$timestamp, etweek$lexp, xlab="Time", ylab="Log of exposure time [s]", main=sprintf("Exposure times %s to %s", etweek$date[1], etweek$date[nrow(etday)]))
-lines(etweek$timestamp, etweek$lexp)
-dev.off()

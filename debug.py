@@ -26,3 +26,9 @@ dawn = s["dawn"] + datetime.timedelta(minutes=15)
 #    html += '<tr><td><img src="%s.jpg" width="%d" height="%d" alt="%s"/></td>' % (Species_Name, xsize, ysize, Species_Name)
 #    html += '<td>%s</td><td>%dh - %dh</td></tr>\n' % (Species_Name, Start_hour, End_hour)
 #html += '</tr></table>'
+
+#et$lexp <- log(et$exp_time)
+#png("/home/nyk/exptime1.png", width=696, height=320)
+#plot(etday$timestamp, etday$lexp, xlab="Time", ylab="Log of exposure time [s]", main=sprintf("Exposure times at %s", etday$date[nrow(etday)]))
+#lines(etday$timestamp, etday$lexp)
+#dev.off()
