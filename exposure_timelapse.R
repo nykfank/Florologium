@@ -1,12 +1,13 @@
 args <- commandArgs(trailingOnly=TRUE)
 nb_days <- as.integer(args[1])
-use_daytime <- 1
+use_daytime <- as.integer(args[2])
 movie_seconds <- 30
 fps <- 20
 nb_imgs <- movie_seconds * fps
 indir <- '/home/nyk/nikon_696x464'
-outdir <- sprintf('/home/nyk/nikon_696x464_%d', nb_days)
+outdir <- sprintf('/home/nyk/nikon_696x464_%d_%d', nb_days, use_daytime)
 vidfile <- sprintf('/home/nyk/video/nikon_timelapse%d.mp4', nb_days)
+if (use_daytime == 0) vidfile <- sprintf('/home/nyk/video/nikon_timelapse%d_night.mp4', nb_days)
 if (!dir.exists(outdir)) {
 	dir.create(outdir)
 } else {
@@ -19,8 +20,9 @@ et <- et[order(et$timestamp),]
 et$date <- as.Date(et$timestamp)
 subet <- et[et$timestamp > Sys.time() - nb_days*24*3600,]
 subet <- subet[order(subet$exp_time, decreasing=TRUE),]
-if (use_daytime == 1) subet <- subet[subet$exp_time < 0.01,] else subet <- subet[subet$exp_time > 5,]
+if (use_daytime == 1) subet <- subet[subet$exp_time < 0.01,] else subet <- subet[subet$exp_time > 1,]
 # Take the middle part of the images order by exposure time to avoid the extreme exposures.
+if (nrow(subet) < nb_imgs) nb_imgs <- round(nrow(subet) * 0.9)
 i1 <- round(nrow(subet)/2 - nb_imgs/2)
 i2 <- round(nrow(subet)/2 + nb_imgs/2)
 subet <- subet[i1:i2,]
