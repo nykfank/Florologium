@@ -6,8 +6,8 @@ import astral, astral.sun, datetime
 # Location of Botanical Gardens Bern and its local timezone.
 loc = astral.LocationInfo(timezone='Europe/Zurich', latitude=46.95263, longitude=7.44545)
 s = astral.sun.sun(loc.observer, tzinfo=loc.timezone)
-dusk = s["dusk"] + datetime.timedelta(minutes=5)
-dawn = s["dawn"] - datetime.timedelta(minutes=5)
+dusk = s["dusk"] + datetime.timedelta(minutes=10)
+dawn = s["dawn"]
 current_time = datetime.datetime.now().astimezone()
 delta = 0
 if current_time < dawn: delta = (dawn - current_time).seconds
