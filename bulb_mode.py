@@ -7,7 +7,7 @@ import astral, astral.sun, datetime
 loc = astral.LocationInfo(timezone='Europe/Zurich', latitude=46.95263, longitude=7.44545)
 s = astral.sun.sun(loc.observer, tzinfo=loc.timezone)
 dusk = s["dusk"] + datetime.timedelta(minutes=10)
-dawn = s["dawn"]
+dawn = s["dawn"] + datetime.timedelta(minutes=5)
 current_time = datetime.datetime.now().astimezone()
 delta = 0
 if current_time < dawn: delta = (dawn - current_time).seconds
