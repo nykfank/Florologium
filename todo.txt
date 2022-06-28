@@ -1,3 +1,4 @@
 - Look at exposure issue around 5 AM.
 - Flower (open) recognition in cutout images.
 - Add DE/FR pages for new pages created only in EN.
+- Compare each image to the one before it to find outlier images with interesting events?
