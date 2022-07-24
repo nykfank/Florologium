@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import cv2, numpy, sys, os
+import cv2, sys, os
 data_file = "%s/Florologium/plant_positions.txt" % os.environ['HOME']
 outdir = '%s/cutout' % os.environ['HOME']
 outurl = 'https://www.florologium.ch/cutout'
