@@ -3,4 +3,4 @@
 */5 * * * *	/home/pi/boga/nikon_pic.sh
 */30 * * * *    /home/pi/boga/wan_update.sh
 */15 * * * *	/home/pi/boga/run_missing.sh
-00 12 * * *	cp /var/www/florologium/cutout/* /var/www/florologium/cutout_noon/
+00 12 * * *	/home/pi/boga/cutout_archive.sh
