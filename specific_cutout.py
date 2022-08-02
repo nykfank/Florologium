@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import cv2, sys, os, cgi, numpy, cgitb
+import cv2, sys, os, cgi, numpy, cgitb, io
 form = cgi.FieldStorage()
 cgitb.enable()
 year, mon, day = int(form.getvalue('year', 2022)), int(form.getvalue('mon', 7)), int(form.getvalue('day', 30))
@@ -9,7 +9,8 @@ img_dir = '/mnt/big/katzidien_backup/var/www/florologium/nikon'
 img_files = os.listdir(img_dir)
 img_id = '%d%02d%02d_%02d%02d' % (year, mon, day, hour, minute)
 out_fn = '/var/www/florologium/scut/%s_%s.png' % (sel_species, img_id)
-if not os.path.isfile(out_fn):
+#if not os.path.isfile(out_fn):
+if True:
     img_matches = [i for i in img_files if i.startswith(img_id)]
     assert(len(img_matches) == 1)
     data_file = "/home/pi/Florologium/plant_positions.txt"
@@ -25,12 +26,15 @@ if not os.path.isfile(out_fn):
     X_Coordinate, Y_Coordinate, Start_hour, End_hour = specd[sel_species]
     crop_img = img[Y_Coordinate:Y_Coordinate+ysize, X_Coordinate:X_Coordinate+xsize]
     cv2.imwrite(out_fn, crop_img)
-print('Content-Type: text/html;charset=utf-8\n\n')
-print('<html><head><title>Test</title></head><body>\n')
-print('<p><img src="http://florologium.ch/scut/%s_%s.png"/></p>' % (sel_species, img_id))
-print('</body></html>')
-#img_str = cv2.imencode('.png', crop_img)[1].tobytes()
-#print('Content-type: image/png\n\n%s' % numpy.array(img_str).tostring())
+#print('Content-Type: text/html;charset=utf-8\n\n')
+#print('<html><head><title>Test</title></head><body>\n')
+#print('<p><img src="http://florologium.ch/scut/%s_%s.png"/></p>' % (sel_species, img_id))
+#print('</body></html>')
+img_str = cv2.imencode('.png', crop_img)[1].tobytes()
+#print('Content-type: image/png\n\n%s' % img_str)
+print('Content-Type: image/png\r\n\r\n')
+print(img_str)
+print('\r\n')
 #out = sys.stdout
 #out.write(b"Content-Type: image/png\r\n")
 #out.write(numpy.array(img_str).tostring())
