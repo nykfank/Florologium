@@ -6,7 +6,7 @@ out_dir = '/var/www/florologium/scut'
 xsize = 400
 ysize = 300
 
-import cv2, sys, os, cgi, cgitb, datetime
+import cv2, sys, os, cgi, datetime
 
 def load_species_positions(data_file):
     specd = {}
@@ -17,7 +17,7 @@ def load_species_positions(data_file):
     return(specd)
 
 form = cgi.FieldStorage()
-cgitb.enable()
+#cgitb.enable()
 today = datetime.date.today()
 year = int(form.getvalue('year', today.year)) 
 mon = int(form.getvalue('mon', today.month))
