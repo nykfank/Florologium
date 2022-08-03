@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 
-data_file = "/home/pi/Florologium/plant_positions.txt"
-img_dir = '/var/www/florologium/nikon'
-out_dir = '/var/www/florologium/scut'
+data_file = "/home/nyk/Florologium/plant_positions.txt"
+img_dir = '/home/nyk/nikon'
+out_dir = '/var/www/scut'
 xsize = 400
 ysize = 300
 
