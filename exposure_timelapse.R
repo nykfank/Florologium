@@ -28,7 +28,7 @@ i2 <- round(nrow(subet)/2 + nb_imgs/2)
 subet <- subet[i1:i2,]
 subet <- subet[order(subet$timestamp, decreasing=FALSE),]
 for (f in subet$filename) {
-	file.copy(sprintf("%s/%s", indir, f), sprintf("%s/%s", outdir, f))
+	file.symlink(sprintf("%s/%s", indir, f), sprintf("%s/%s", outdir, f))
 }
 cmd <- sprintf("ffmpeg -y -hide_banner -loglevel panic -framerate %d -pattern_type glob -i '%s/*.jpg' -c:v libx264 -strict -2 -pix_fmt yuv420p -f mp4 %s", fps, outdir, vidfile)
 writeLines(cmd)
