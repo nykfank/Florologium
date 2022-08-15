@@ -1,5 +1,5 @@
 args <- commandArgs(trailingOnly=TRUE)
-sel_hour <- 16
+sel_hour <- as.integer(args[1]) # 16 was first tested.
 movie_seconds <- 30
 fps <- 20
 photo_interval_seconds <- 5
@@ -27,14 +27,10 @@ subet <- et[et$seldiff <= diff_limit,]
 for (f in subet$filename) {
 	fn1 <- sprintf("%s/%s", indir, f)
 	fn2 <- sprintf("%s/%s", outdir, f)
-	if (file.exists(fn1)) {
-		file.symlink(fn1, fn2)
-	} else {
-		writeLines(sprintf("Not found: %s", fn1))
-	}
+	if (file.exists(fn1)) file.symlink(fn1, fn2)
 }
 # Use a resolution of 3840 x 2160 (the 4K norm), not the full 5568x3712 of the camera, otherwise it'll be a huge video file.
-cmd <- sprintf("ffmpeg -y -framerate %d -pattern_type glob -i '%s/*.jpg' -s 3840x2160 -c:v libx264 -strict -2 -pix_fmt yuv420p -f mp4 %s", fps, outdir, vidfile)
+# Better use 2048x1080 (2K video), my laptop is too slow to play 4K!
+cmd <- sprintf("ffmpeg -y -hide_banner -loglevel panic -framerate %d -pattern_type glob -i '%s/*.jpg' -s 2048x1080 -c:v libx264 -strict -2 -pix_fmt yuv420p -f mp4 %s", fps, outdir, vidfile)
 writeLines(cmd)
 system(cmd)
-
