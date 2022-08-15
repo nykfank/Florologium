@@ -1,6 +1,4 @@
 args <- commandArgs(trailingOnly=TRUE)
-use_daytime <- as.integer(args[2])
-
 start_hour <- 16
 movie_seconds <- 30
 fps <- 20
@@ -16,12 +14,15 @@ if (!dir.exists(outdir)) {
 et <- read.table("/home/nyk/exposure_times.txt")
 colnames(et) <- c("filename", "exp_time")
 et$timestamp <- strptime(et$filename, "%Y%m%d_%H%M%S")
-et <- et[order(et$timestamp),]
 et$date <- as.Date(et$timestamp)
+et$hour <- as.integer(strftime(et$timestamp, "%H"))
+et$minute <- as.integer(strftime(et$timestamp, "%M"))
+et <- et[order(et$timestamp),]
+nb_days <- length(unique(et$date))
 
-for (f in subet$filename) {
-	file.copy(sprintf("%s/%s", indir, f), sprintf("%s/%s", outdir, f))
-}
+#for (f in subet$filename) {
+#	file.copy(sprintf("%s/%s", indir, f), sprintf("%s/%s", outdir, f))
+#}
 
 #cmd <- sprintf("ffmpeg -y -hide_banner -loglevel panic -framerate %d -pattern_type glob -i '%s/*.jpg' -c:v libx264 -strict -2 -pix_fmt yuv420p -f mp4 %s", fps, outdir, vidfile)
 #writeLines(cmd)
