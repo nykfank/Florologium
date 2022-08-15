@@ -25,7 +25,13 @@ img_per_day <- nb_imgs / nb_days
 diff_limit <- img_per_day * photo_interval_seconds / 60 / 2
 subet <- et[et$seldiff <= diff_limit,]
 for (f in subet$filename) {
-	file.symlink(sprintf("%s/%s", indir, f), sprintf("%s/%s", outdir, f))
+	fn1 <- sprintf("%s/%s", indir, f)
+	fn2 <- sprintf("%s/%s", outdir, f)
+	if (file.exists(fn1)) {
+		file.symlink(fn1, fn2)
+	} else {
+		writeLines(sprintf("Not found: %s", fn1))
+	}
 }
 # Use a resolution of 3840 x 2160 (the 4K norm), not the full 5568x3712 of the camera, otherwise it'll be a huge video file.
 cmd <- sprintf("ffmpeg -y -framerate %d -pattern_type glob -i '%s/*.jpg' -s 3840x2160 -c:v libx264 -strict -2 -pix_fmt yuv420p -f mp4 %s", fps, outdir, vidfile)
