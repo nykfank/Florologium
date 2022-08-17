@@ -19,5 +19,6 @@ rsync -p ~/Florologium/specific_cutout.py flor:/var/www/
 rsync -p ~/Florologium/plant_positions.txt flor:Florologium
 rsync -p ~/Florologium/plant_positions.txt katz:Florologium
 rsync -p ~/Florologium/nikon_exposure.py flor:Florologium
+rsync -p ~/Florologium/nikon_brightness.py flor:Florologium
 
 #rsync -vp ~/Florologium/wan_update.sh katz:boga
