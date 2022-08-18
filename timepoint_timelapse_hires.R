@@ -1,6 +1,5 @@
 args <- commandArgs(trailingOnly=TRUE)
 sel_hour <- as.integer(args[1]) # 16 was first tested.
-sel_hour <- 2
 movie_seconds <- 30
 fps <- 20
 photo_interval_seconds <- 5
