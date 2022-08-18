@@ -1,6 +1,6 @@
 args <- commandArgs(trailingOnly=TRUE)
 sel_hour <- as.integer(args[1]) # 16 was first tested.
-#sel_hour <- 2
+sel_hour <- 2
 movie_seconds <- 30
 fps <- 20
 photo_interval_seconds <- 5
@@ -8,36 +8,27 @@ nb_imgs <- movie_seconds * fps
 indir <- '/home/nyk/backup_nikon'
 outdir <- sprintf('/home/nyk/florologium_hires_%d', sel_hour)
 vidfile <- sprintf('/home/nyk/florologium_hires_%d.mp4', sel_hour)
-if (!dir.exists(outdir)) {
-	dir.create(outdir)
-} else {
-	for (f in list.files(outdir)) unlink(sprintf("%s/%s", outdir, f))
-}
-
+if (!dir.exists(outdir)) dir.create(outdir) else for (f in list.files(outdir)) unlink(sprintf("%s/%s", outdir, f))
+# Loading brighness values for photos
 br <- read.table("/home/nyk/brightness.txt")
 colnames(br) <- c("filename", "brightness")
-
-et <- read.table("/home/nyk/exposure_times.txt")
-colnames(et) <- c("filename", "exp_time")
-et <- merge(et, br, by="filename", all.x=TRUE)
-et$timestamp <- strptime(et$filename, "%Y%m%d_%H%M%S")
-et$date <- as.Date(et$timestamp)
-et$hour <- as.integer(strftime(et$timestamp, "%H"))
-et$minute <- as.integer(strftime(et$timestamp, "%M"))
-et$hourmin <- et$hour + et$minute/60
-et$seldiff <- abs(et$hourmin - sel_hour)
-nb_days <- length(unique(et$date))
+br$timestamp <- strptime(br$filename, "%Y%m%d_%H%M%S")
+br$date <- as.Date(br$timestamp)
+br$hour <- as.integer(strftime(br$timestamp, "%H"))
+br$minute <- as.integer(strftime(br$timestamp, "%M"))
+nb_days <- length(unique(br$date))
 img_per_day <- nb_imgs / nb_days
-diff_limit <- img_per_day * photo_interval_seconds / 60 / 2
-subet <- et[et$seldiff <= diff_limit,]
-et$brdiff <- abs(et$brightness - mean(subet$brightness))
-subet <- et[et$hour == sel_hour | et$hour == (sel_hour - 1),]
-subet <- subet[order(subet$date, subet$brdiff),]
-a <- as.data.frame(table(subet$date))
-subet$idx <- unlist(lapply(a$Freq, function(x) seq(x)))
-subet <- subet[subet$idx <= round(img_per_day),]
+subbr <- br[br$hour == sel_hour | br$hour == (sel_hour - 1),]
+subbr$brdiff <- abs(subbr$brightness - mean(subbr$brightness))
+subbr <- subbr[order(subbr$date, subbr$brdiff),]
+datetab <- as.data.frame(table(subbr$date))
+subbr$idx <- unlist(lapply(datetab$Freq, function(x) seq(x)))
+subbr <- subbr[subbr$idx <= 1+ceiling(img_per_day),]
+subbr2 <- subbr[subbr$brdiff <= quantile(subbr$brdiff, 0.95),] # Outlier removal
+writeLines(sprintf("Selected hour: %d, Target images: %d, Selected images: %d, Outliers: %d", 
+	sel_hour, nb_imgs, nrow(subbr2), nrow(subbr)-nrow(subbr2)))
 # Copy/Symlink
-for (f in subet$filename) {
+for (f in subbr2$filename) {
 	fn1 <- sprintf("%s/%s", indir, f)
 	fn2 <- sprintf("%s/%s", outdir, f)
 	if (file.exists(fn1)) file.symlink(fn1, fn2)
