@@ -9,7 +9,7 @@ outdir <- sprintf('/home/nyk/florologium_hires_%d', sel_hour)
 vidfile <- sprintf('/home/nyk/florologium_hires_%d.mp4', sel_hour)
 if (!dir.exists(outdir)) dir.create(outdir) else for (f in list.files(outdir)) unlink(sprintf("%s/%s", outdir, f))
 # Loading brighness values for photos
-br <- read.table("/home/nyk/brightness.txt")
+br <- read.table("/home/nyk/brightness.txt", stringsAsFactors=FALSE)
 colnames(br) <- c("filename", "brightness")
 br$timestamp <- strptime(br$filename, "%Y%m%d_%H%M%S")
 br$date <- as.Date(br$timestamp)
@@ -27,10 +27,15 @@ subbr2 <- subbr[subbr$brdiff <= quantile(subbr$brdiff, 0.95),] # Outlier removal
 writeLines(sprintf("Selected hour: %d, Target images: %d, Selected images: %d, Outliers: %d", 
 	sel_hour, nb_imgs, nrow(subbr2), nrow(subbr)-nrow(subbr2)))
 # Copy/Symlink
-for (f in subbr2$filename) {
+for (i in 1:nrow(subbr2)) {
+	f <- subbr2[i, "filename"]
 	fn1 <- sprintf("%s/%s", indir, f)
 	fn2 <- sprintf("%s/%s", outdir, f)
-	if (file.exists(fn1)) file.symlink(fn1, fn2)
+	if (file.exists(fn1)) file.copy(fn1, fn2)
+	zeit <- strftime(subbr2[i, "timestamp"], "%Y-%m-%d %H:%M")
+	cmd <- sprintf('/home/nyk/Florologium/date_to_image.py %s %s', fn2, zeit)
+	writeLines(cmd)
+	system(cmd)
 }
 # Use a resolution of 3840 x 2160 (the 4K norm), not the full 5568x3712 of the camera, otherwise it'll be a huge video file.
 # Better use 2048x1080 (2K video), my laptop is too slow to play 4K!
