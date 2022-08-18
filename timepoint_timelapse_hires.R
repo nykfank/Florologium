@@ -18,11 +18,11 @@ br$minute <- as.integer(strftime(br$timestamp, "%M"))
 nb_days <- length(unique(br$date))
 img_per_day <- nb_imgs / nb_days
 subbr <- br[br$hour == sel_hour | br$hour == (sel_hour - 1),]
-subbr$brdiff <- abs(subbr$brightness - mean(subbr$brightness))
+subbr$brdiff <- abs(subbr$brightness - median(subbr$brightness))
 subbr <- subbr[order(subbr$date, subbr$brdiff),]
 datetab <- as.data.frame(table(subbr$date))
 subbr$idx <- unlist(lapply(datetab$Freq, function(x) seq(x)))
-subbr <- subbr[subbr$idx <= 1+ceiling(img_per_day),]
+subbr <- subbr[subbr$idx <= 1+ceiling(img_per_day),] # Select images nearest the median each day
 subbr2 <- subbr[subbr$brdiff <= quantile(subbr$brdiff, 0.95),] # Outlier removal
 writeLines(sprintf("Selected hour: %d, Target images: %d, Selected images: %d, Outliers: %d", 
 	sel_hour, nb_imgs, nrow(subbr2), nrow(subbr)-nrow(subbr2)))
