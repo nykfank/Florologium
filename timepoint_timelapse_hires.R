@@ -31,7 +31,8 @@ for (i in 1:nrow(subbr2)) {
 	f <- subbr2[i, "filename"]
 	fn1 <- sprintf("%s/%s", indir, f)
 	fn2 <- sprintf("%s/%s", outdir, f)
-	if (file.exists(fn1)) file.copy(fn1, fn2)
+	if (!file.exists(fn1)) next
+	file.copy(fn1, fn2)
 	zeit <- strftime(subbr2[i, "timestamp"], "%Y-%m-%d %H:%M")
 	cmd <- sprintf('/home/nyk/Florologium/date_to_image.py %s "%s"', fn2, zeit)
 	writeLines(cmd)
