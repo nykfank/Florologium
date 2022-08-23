@@ -3,7 +3,7 @@
 # 2010-06-21 by Nick Fankhauser
 # 2014-03-24: simplified
 # 2020-08-22: Adapted to python3
-import sys,os,time,Image,math,numpy
+import sys,os,time,Image,math,numpy,subprocess
 
 framerate = 20
 wink = math.pi / 2
@@ -56,8 +56,17 @@ for cnt,f in enumerate(photoList):
  wink-=wg
  box=int(xi-dvdx/2),int(yi-dvdy/2),int(xi+dvdx/2),int(yi+dvdy/2)
  img = Image.open(f)
+ try: img.load()
+ except: 
+    print('Broken: %s' % f)
+    continue
  img=img.crop(box).resize((dvdx,dvdy))
  ofn = '%s/%s' % (tDir, os.path.basename(f))
  img.save(ofn)
+ p = os.path.basename(f)
+ zeit2 = '%s-%s-%s %s:%s' % (p[0:4], p[4:6], p[6:8], p[9:11], p[11:13])
+ cmd = '/home/nyk/Florologium/date_to_image.py', ofn, zeit2
+ subprocess.call(cmd)
+
 
 # ffmpeg -y -hide_banner -loglevel panic -framerate %d -pattern_type glob -i '/home/nyk/florologium_hires_2_rota/*.jpg' -c:v libx264 -strict -2 -pix_fmt yuv420p -f mp4 test.mp4

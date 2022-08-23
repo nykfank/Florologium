@@ -1,6 +1,6 @@
 args <- commandArgs(trailingOnly=TRUE)
 sel_hour <- as.integer(args[1]) # 16 was first tested.
-movie_seconds <- 30
+movie_seconds <- 60
 fps <- 20
 photo_interval_seconds <- 5
 nb_imgs <- movie_seconds * fps
@@ -36,7 +36,7 @@ for (i in 1:nrow(subbr2)) {
 	zeit <- strftime(subbr2[i, "timestamp"], "%Y-%m-%d %H:%M")
 	cmd <- sprintf('/home/nyk/Florologium/date_to_image.py %s "%s"', fn2, zeit)
 	writeLines(cmd)
-	system(cmd)
+#	system(cmd)
 }
 # Use a resolution of 3840 x 2160 (the 4K norm), not the full 5568x3712 of the camera, otherwise it'll be a huge video file.
 # Better use 2048x1080 (2K video), my laptop is too slow to play 4K!
