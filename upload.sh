@@ -11,6 +11,7 @@ rsync -p ~/Florologium/missing.R flor:Florologium
 rsync -p ~/Florologium/run_missing.sh katz:boga
 rsync -p ~/Florologium/cutout_archive.sh katz:boga
 rsync -p ~/Florologium/scale_images.py flor:Florologium
+rsync -p ~/Florologium/anomaly_detection.py flor:Florologium
 rsync -p ~/Florologium/date_to_image.py flor:Florologium
 rsync -p ~/Florologium/crontab_katz.txt katz:.
 rsync -p ~/Florologium/perspective_transformation.py flor:Florologium
