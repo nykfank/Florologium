@@ -19,7 +19,7 @@ def seq_ssimscores(infiles):
 	print(numpy.median(scorelist))
 	print(scipy.stats.iqr(scorelist))
 	print(scorelist)
-	return [ i + 1 for i, x in enumerate(scorelist) if x < numpy.median(scorelist) - scipy.stats.iqr(scorelist) * 1.2 ]
+	return [ i + 1 for i, x in enumerate(scorelist) if x < numpy.median(scorelist) - scipy.stats.iqr(scorelist) * 1.5 ]
 
 infiles = sorted(filter(lambda x : x.endswith('.jpg'), os.listdir(indir)))
 idx = seq_ssimscores(infiles)

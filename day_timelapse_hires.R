@@ -1,0 +1,42 @@
+args <- commandArgs(trailingOnly=TRUE)
+sel_day <- args[1] # 2022-06-01 was first tested.
+fps <- 5
+indir <- '/home/nyk/backup_nikon'
+outdir <- sprintf('/home/nyk/florologium_hires_%s', sel_day)
+vidfile <- sprintf('/home/nyk/florologium_hires_%s.mp4', sel_day)
+if (!dir.exists(outdir)) dir.create(outdir) else for (f in list.files(outdir)) unlink(sprintf("%s/%s", outdir, f))
+# Loading brighness values for photos
+br <- read.table("/home/nyk/brightness.txt", stringsAsFactors=FALSE)
+colnames(br) <- c("filename", "brightness")
+br$timestamp <- strptime(br$filename, "%Y%m%d_%H%M%S")
+br <- br[order(br$timestamp),]
+br$date <- as.Date(br$timestamp)
+subr <- br[br$date == as.Date(sel_day),]
+# Outlier removal
+outl <- EnvStats::rosnerTest(subr$brightness, k=10) # Rosner’s test for outliers 
+outl_idx <- outl$all.stats[outl$all.stats$Outlier == TRUE, "Obs.Num"]
+print(outl$all.stats)
+writeLines(sprintf("Removed %d of %d images.", length(outl_idx), nrow(subr)))
+writeLines(subr[outl_idx, "filename"])
+subr <- subr[-outl_idx,]
+# Copy
+for (i in 1:nrow(subr)) {
+	f <- subr[i, "filename"]
+	fn1 <- sprintf("%s/%s", indir, f)
+	fn2 <- sprintf("%s/%s", outdir, f)
+	if (!file.exists(fn1)) {
+		writeLines(sprintf("%s does not exists!", fn1))
+		next
+	}
+	writeLines(sprintf("%d/%d %s", i, nrow(subr), f))
+	file.copy(fn1, fn2)
+	zeit <- strftime(subr[i, "timestamp"], "%Y-%m-%d %H:%M")
+	cmd <- sprintf('/home/nyk/Florologium/date_to_image.py %s "%s"', fn2, zeit)
+	system(cmd)
+}
+# Use a resolution of 3840 x 2160 (the 4K norm), not the full 5568x3712 of the camera, otherwise it'll be a huge video file.
+# Better use 2048x1080 (2K video), my laptop is too slow to play 4K!
+cmd <- sprintf("ffmpeg -y -hide_banner -loglevel panic -framerate %d -pattern_type glob -i '%s/*.jpg' -s 2048x1080 -c:v libx264 -strict -2 -pix_fmt yuv420p -f mp4 %s", 
+	fps, outdir, vidfile)
+writeLines(cmd)
+system(cmd)
