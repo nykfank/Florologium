@@ -23,6 +23,7 @@ if (length(outl_idx) > 0) {
 	subr <- subr[-outl_idx,]
 }
 # Copy
+pb = txtProgressBar(min=0, max=nrow(subr), initial=0, style=3) 
 for (i in 1:nrow(subr)) {
 	f <- subr[i, "filename"]
 	fn1 <- sprintf("%s/%s", indir, f)
@@ -31,12 +32,13 @@ for (i in 1:nrow(subr)) {
 		writeLines(sprintf("%s does not exists!", fn1))
 		next
 	}
-	writeLines(sprintf("%d/%d %s", i, nrow(subr), f))
+	setTxtProgressBar(pb, i)
 	file.copy(fn1, fn2)
 	zeit <- strftime(subr[i, "timestamp"], "%Y-%m-%d %H:%M")
 	cmd <- sprintf('/home/nyk/Florologium/date_to_image.py %s "%s"', fn2, zeit)
 	system(cmd)
 }
+close(pb)
 # Use a resolution of 3840 x 2160 (the 4K norm), not the full 5568x3712 of the camera, otherwise it'll be a huge video file.
 # Better use 2048x1080 (2K video), my laptop is too slow to play 4K!
 cmd <- sprintf("ffmpeg -y -hide_banner -loglevel panic -framerate %d -pattern_type glob -i '%s/*.jpg' -s 2048x1080 -c:v libx264 -strict -2 -pix_fmt yuv420p -f mp4 %s", 
