@@ -1,5 +1,6 @@
 args <- commandArgs(trailingOnly=TRUE)
-sel_day <- args[1] # 2022-06-01 was first tested.
+sel_day <- args[1]
+if (interactive()) sel_day <- "2022-08-03"
 fps <- 5
 indir <- '/home/nyk/backup_nikon'
 outdir <- sprintf('/home/nyk/florologium_hires_%s', sel_day)
@@ -17,8 +18,10 @@ outl <- EnvStats::rosnerTest(subr$brightness, k=10) # Rosner’s test for outlie
 outl_idx <- outl$all.stats[outl$all.stats$Outlier == TRUE, "Obs.Num"]
 print(outl$all.stats)
 writeLines(sprintf("Removed %d of %d images.", length(outl_idx), nrow(subr)))
-writeLines(subr[outl_idx, "filename"])
-subr <- subr[-outl_idx,]
+if (length(outl_idx) > 0) {
+	writeLines(subr[outl_idx, "filename"])
+	subr <- subr[-outl_idx,]
+}
 # Copy
 for (i in 1:nrow(subr)) {
 	f <- subr[i, "filename"]
@@ -40,3 +43,7 @@ cmd <- sprintf("ffmpeg -y -hide_banner -loglevel panic -framerate %d -pattern_ty
 	fps, outdir, vidfile)
 writeLines(cmd)
 system(cmd)
+
+# datab <- as.data.frame(table(br$date))
+# datab$date <- gsub("2022-", "", as.character(datab$Var1))
+# barplot(datab$Freq, names.arg=datab$date, las=3, cex.names=0.8)
