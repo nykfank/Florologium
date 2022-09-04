@@ -6,6 +6,7 @@ rsync -p ~/Florologium/boga_timelapse.sh katz:boga
 rsync -p ~/Florologium/exposure_timelapse.R flor:Florologium
 rsync -p ~/Florologium/exposure_timelapse_hires.R flor:Florologium
 rsync -p ~/Florologium/timepoint_timelapse_hires.R flor:Florologium
+rsync -p ~/Florologium/day_timelapse_hires.R flor:Florologium
 rsync -p ~/Florologium/make_timelapse.py flor:Florologium
 rsync -p ~/Florologium/missing.R flor:Florologium
 rsync -p ~/Florologium/run_missing.sh katz:boga

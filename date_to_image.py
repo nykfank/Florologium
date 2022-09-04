@@ -17,8 +17,7 @@ def draw_date(img,txs):
  draw = PIL.ImageDraw.Draw(img) # new draw instance 
  arial=load_font(fontSize)
  tsize=draw.textsize(txs,font=arial)
- #draw.text((img.size[0]-tsize[0]-10, img.size[1]-tsize[1]-10), txs, fill='navy', font=arial)
- draw.text((10, 10), txs, fill='navy', font=arial)
+ draw.text((10, 10), txs, fill='white', font=arial)
  return img
 
 fn = sys.argv[1]
