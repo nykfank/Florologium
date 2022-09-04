@@ -16,7 +16,6 @@ def draw_date(img,txs):
  fontSize=int(img.size[1]/20)
  draw = PIL.ImageDraw.Draw(img) # new draw instance 
  arial=load_font(fontSize)
- tsize=draw.textsize(txs,font=arial)
  draw.text((10, 10), txs, fill='white', font=arial)
  return img
 
