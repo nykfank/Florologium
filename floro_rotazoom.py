@@ -56,7 +56,7 @@ for cnt,f in enumerate(photoList):
  xi,yi=int(rad*math.sin(wink)*ely)+xc,int(rad*math.cos(wink))+yc
  wink-=wg
  box=int(xi-dvdx/2),int(yi-dvdy/2),int(xi+dvdx/2),int(yi+dvdy/2)
- img = Image.open(f)
+ img = PIL.Image.open(f)
  try: img.load()
  except: 
     print('Broken: %s' % f)
