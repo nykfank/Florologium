@@ -1,9 +1,9 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # Rotating zoom timelapse
 # 2010-06-21 by Nick Fankhauser
 # 2014-03-24: simplified
 # 2020-08-22: Adapted to python3
-import sys,os,time,Image,math,numpy,subprocess
+import sys,os,time,PIL.Image,math,numpy,subprocess
 
 framerate = 20
 wink = math.pi / 2
@@ -22,7 +22,7 @@ def clean_directory(d):
  return cnt
 
 def check_temp(d):
- if os.path.isdir(d): print 'Deleted %d files in %s' % (clean_directory(d),d)
+ if os.path.isdir(d): print('Deleted %d files in %s' % (clean_directory(d),d))
  else: os.mkdir(d)
 
 def scan_directory(d):
@@ -38,7 +38,7 @@ def scan_directory(d):
 
 check_temp(tDir)
 photoList=filter(lambda x : x[-4:].lower()=='.jpg',scan_directory(startDir))
-img=Image.open(photoList[0])
+img = PIL.Image.open(photoList[0])
 xc,yc=img.size[0]/2,img.size[1]/2 # center of circle
 rad=min(img.size)/2-min([dvdx,dvdy])/2 # circle radius
 ely=(float(img.size[0])/float(img.size[1]))*0.8 # elyptic factor
