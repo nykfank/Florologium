@@ -37,7 +37,7 @@ def scan_directory(d):
  return sorted(rl)
 
 check_temp(tDir)
-photoList=filter(lambda x : x[-4:].lower()=='.jpg',scan_directory(startDir))
+photoList=list(filter(lambda x : x[-4:].lower()=='.jpg',scan_directory(startDir)))
 img = PIL.Image.open(photoList[0])
 xc,yc=img.size[0]/2,img.size[1]/2 # center of circle
 rad=min(img.size)/2-min([dvdx,dvdy])/2 # circle radius
