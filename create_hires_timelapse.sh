@@ -4,7 +4,8 @@ Rscript Florologium/timepoint_timelapse_hires.R 7 0
 Florologium/floro_rotazoom.py florologium_hires_7
 
 Rscript Florologium/day_timelapse_hires.R 2022-05-10
-Rscript Florologium/day_timelapse_hires.R 2022-06-01
-Rscript Florologium/day_timelapse_hires.R 2022-07-04
-Rscript Florologium/day_timelapse_hires.R 2022-08-01
-Rscript Florologium/day_timelapse_hires.R 2022-09-01
+Rscript Florologium/day_timelapse_hires.R 2022-06-10
+Rscript Florologium/day_timelapse_hires.R 2022-07-10
+Rscript Florologium/day_timelapse_hires.R 2022-08-10
+Rscript Florologium/day_timelapse_hires.R 2022-09-05
+
