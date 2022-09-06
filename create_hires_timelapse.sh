@@ -9,3 +9,5 @@ Rscript Florologium/day_timelapse_hires.R 2022-07-10
 Rscript Florologium/day_timelapse_hires.R 2022-08-10
 Rscript Florologium/day_timelapse_hires.R 2022-09-05
 
+# file '/path/to/file1'
+# ffmpeg -f concat -safe 0 -i mylist.txt -c copy output.mp4
