@@ -29,7 +29,7 @@ subbr2 <- subbr[subbr$brdiff <= quantile(subbr$brdiff, 0.95),] # Outlier removal
 writeLines(sprintf("Selected hour: %d, Target images: %d, Selected images: %d, Outliers: %d", 
 	sel_hour, nb_imgs, nrow(subbr2), nrow(subbr)-nrow(subbr2)))
 # Copy
-pb = txtProgressBar(min=0, max=nrow(subr), initial=0, style=3) 
+pb = txtProgressBar(min=0, max=nrow(subbr2), initial=0, style=3) 
 for (i in 1:nrow(subbr2)) {
 	f <- subbr2[i, "filename"]
 	fn1 <- sprintf("%s/%s", indir, f)
