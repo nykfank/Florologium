@@ -9,6 +9,7 @@ rsync -p ~/Florologium/timepoint_timelapse_hires.R flor:Florologium
 rsync -p ~/Florologium/day_timelapse_hires.R flor:Florologium
 rsync -p ~/Florologium/make_timelapse.py flor:Florologium
 rsync -p ~/Florologium/missing.R flor:Florologium
+rsync -p ~/Florologium/floro_rotazoom.py flor:Florologium
 rsync -p ~/Florologium/run_missing.sh katz:boga
 rsync -p ~/Florologium/cutout_archive.sh katz:boga
 rsync -p ~/Florologium/scale_images.py flor:Florologium

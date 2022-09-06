@@ -4,7 +4,8 @@ if (interactive()) sel_day <- "2022-08-03"
 fps <- 5
 indir <- '/home/nyk/backup_nikon'
 outdir <- sprintf('/home/nyk/florologium_hires_%s', sel_day)
-vidfile <- sprintf('/home/nyk/florologium_hires_%s.mp4', sel_day)
+vidfile <- sprintf('timelapse2K/florologium_hires_%s.mp4', sel_day)
+if (!dir.exists('timelapse2K')) dir.create('timelapse2K') else for (f in list.files(outdir)) unlink(sprintf("%s/%s", outdir, f))
 if (!dir.exists(outdir)) dir.create(outdir) else for (f in list.files(outdir)) unlink(sprintf("%s/%s", outdir, f))
 # Loading brighness values for photos
 br <- read.table("/home/nyk/brightness.txt", stringsAsFactors=FALSE)
@@ -28,10 +29,7 @@ for (i in 1:nrow(subr)) {
 	f <- subr[i, "filename"]
 	fn1 <- sprintf("%s/%s", indir, f)
 	fn2 <- sprintf("%s/%s", outdir, f)
-	if (!file.exists(fn1)) {
-		writeLines(sprintf("%s does not exists!", fn1))
-		next
-	}
+	if (!file.exists(fn1)) next
 	setTxtProgressBar(pb, i)
 	file.copy(fn1, fn2)
 	zeit <- strftime(subr[i, "timestamp"], "%Y-%m-%d %H:%M")
