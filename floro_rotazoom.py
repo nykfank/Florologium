@@ -12,7 +12,7 @@ dvdx,dvdy = 2048, 1080 # target resolution (DVD: 720,576)
 starttime=time.time()
 startDir=os.path.abspath(sys.argv[1]).rstrip('/')+'/'
 tDir = '%s_rota' % startDir.rstrip('/')
-mfn = 'timelapse2K/%s_rota.mp4' % startDir.rstrip('/')
+mfn = 'timelapse2K/%s_rota.mp4' % os.path.basename(startDir)
 
 def clean_directory(d):
  files=os.listdir(d)
@@ -69,7 +69,6 @@ for cnt,f in enumerate(photoList):
  cmd = '/home/nyk/Florologium/date_to_image.py', ofn, zeit2
  subprocess.call(cmd)
 
-
-cmd = 'ffmpeg', '-y', '-hide_banner', '-loglevel', 'panic', '-framerate', framerate, '-pattern_type', 'glob', '-i', '%s/*.jpg' % tDir, '-c:v', 'libx264', '-strict', '-2', '-pix_fmt', 'yuv420p', '-f', 'mp4', mfn
+cmd = 'ffmpeg', '-y', '-hide_banner', '-loglevel', 'panic', '-framerate', str(framerate), '-pattern_type', 'glob', '-i', '%s/*.jpg' % tDir, '-c:v', 'libx264', '-strict', '-2', '-pix_fmt', 'yuv420p', '-f', 'mp4', mfn
 print(cmd)
 subprocess.call(cmd)
