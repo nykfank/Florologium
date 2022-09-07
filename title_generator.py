@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# Add title to the first few PIL.Images of a movie
+# Add title to the first few images of a movie
 import PIL.Image,PIL.ImageDraw,PIL.ImageFont,os,sys,math
 import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning)
