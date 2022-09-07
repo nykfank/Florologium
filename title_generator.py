@@ -3,10 +3,10 @@
 import PIL.Image,PIL.ImageDraw,PIL.ImageFont,os,sys,math
 import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning)
-numframes=25*10 # number of PIL.Images to add the title to
 font_path='/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf'
 indir=sys.argv[1].rstrip('/') # input directory containing only movie frames
-text = sys.argv[2], sys.argv[3], sys.argv[4]
+numframes = int(sys.argv[2]) # number of images to add the title to
+text = sys.argv[3], sys.argv[4], sys.argv[5]
 
 def add_title(f,n):
  path='%s/%s' % (indir,f) # full path to an PIL.Image
