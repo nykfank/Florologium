@@ -12,7 +12,7 @@ dvdx,dvdy = 2048, 1080 # target resolution (DVD: 720,576)
 starttime=time.time()
 startDir=os.path.abspath(sys.argv[1]).rstrip('/')+'/'
 tDir = '%s_rota' % startDir.rstrip('/')
-mfn = 'timelapse2K/%s_rota.mp4' % os.path.basename(startDir)
+mfn = 'timelapse2K/%s_rota.mp4' % startDir.split('/')[-2]
 
 def clean_directory(d):
  files=os.listdir(d)
