@@ -11,6 +11,7 @@ rsync -p ~/Florologium/make_timelapse.py flor:Florologium
 rsync -p ~/Florologium/create_hires_timelapse.sh flor:Florologium
 rsync -p ~/Florologium/missing.R flor:Florologium
 rsync -p ~/Florologium/floro_rotazoom.py flor:Florologium
+rsync -p ~/Florologium/title_generator.py flor:Florologium
 rsync -p ~/Florologium/vidlist.txt flor:Florologium
 rsync -p ~/Florologium/run_missing.sh katz:boga
 rsync -p ~/Florologium/cutout_archive.sh katz:boga

@@ -46,9 +46,9 @@ for (i in 1:nrow(subbr2)) {
 close(pb)
 # Use a resolution of 3840 x 2160 (the 4K norm), not the full 5568x3712 of the camera, otherwise it'll be a huge video file.
 # Better use 2048x1080 (2K video), my laptop is too slow to play 4K!
-if (select_only == 1) {
-	cmd <- sprintf("ffmpeg -y -hide_banner -loglevel panic -framerate %d -pattern_type glob -i '%s/*.jpg' -s 2048x1080 -c:v libx264 -strict -2 -pix_fmt yuv420p -f mp4 %s", 
-		fps, outdir, vidfile)
-	writeLines(cmd)
-	system(cmd)
-}
+#if (select_only == 1) {
+#	cmd <- sprintf("ffmpeg -y -hide_banner -loglevel panic -framerate %d -pattern_type glob -i '%s/*.jpg' -s 2048x1080 -c:v libx264 -strict -2 -pix_fmt yuv420p -f mp4 %s", 
+#		fps, outdir, vidfile)
+#	writeLines(cmd)
+#	system(cmd)
+#}
