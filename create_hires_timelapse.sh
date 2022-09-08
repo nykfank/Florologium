@@ -8,7 +8,7 @@ ffmpeg -y -hide_banner -loglevel panic -framerate 20 -pattern_type glob -i 'flor
 
 Rscript Florologium/timepoint_timelapse_hires.R 7 0
 Florologium/floro_rotazoom.py florologium_hires_7
-Florologium/title_generator.py florologium_hires_7_rota 100 "May to September" "Daytime" "Rotating Version"
+Florologium/title_generator.py florologium_hires_7_rota 100 "May to September" "Daytime" "Rotating Zoom"
 ffmpeg -y -hide_banner -loglevel panic -framerate 20 -pattern_type glob -i 'florologium_hires_7_rota/*.jpg' -s 2048x1080 -c:v libx264 -strict -2 -pix_fmt yuv420p -f mp4 timelapse2K/florologium_hires_7_rota.mp4
 
 Rscript Florologium/day_timelapse_hires.R 2022-05-10
