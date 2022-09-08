@@ -69,6 +69,6 @@ for cnt,f in enumerate(photoList):
  cmd = '/home/nyk/Florologium/date_to_image.py', ofn, zeit2
  subprocess.call(cmd)
 
-cmd = 'ffmpeg', '-y', '-hide_banner', '-loglevel', 'panic', '-framerate', str(framerate), '-pattern_type', 'glob', '-i', '%s/*.jpg' % tDir, '-c:v', 'libx264', '-strict', '-2', '-pix_fmt', 'yuv420p', '-f', 'mp4', mfn
-print(cmd)
-subprocess.call(cmd)
+#cmd = 'ffmpeg', '-y', '-hide_banner', '-loglevel', 'panic', '-framerate', str(framerate), '-pattern_type', 'glob', '-i', '%s/*.jpg' % tDir, '-c:v', 'libx264', '-strict', '-2', '-pix_fmt', 'yuv420p', '-f', 'mp4', mfn
+#print(cmd)
+#subprocess.call(cmd)
