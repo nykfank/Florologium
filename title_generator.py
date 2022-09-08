@@ -24,7 +24,7 @@ def add_title(f,n):
   pos=(s[0]-ts[0])/2, s[1]/2-ts[1]*3/2 + addy # position of text
   fimg_draw.text(pos,t,fill=int(alpha),font=font) # write text to mask
   addy+=ts[1] # add vertical size of bounding box to shift
- solid=PIL.Image.new('RGB',s,(150, 150, 190)) # solid Image for text color
+ solid=PIL.Image.new('RGB',s,(100, 100, 140)) # solid Image for text color
  cimg=PIL.Image.composite(solid,img,fimg) # merge the solid to the Image using the mask
  cimg.save(path) # and overwrite the Image on disk
 
