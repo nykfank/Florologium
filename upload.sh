@@ -7,7 +7,9 @@ rsync -p ~/Florologium/exposure_timelapse.R flor:Florologium
 rsync -p ~/Florologium/exposure_timelapse_hires.R flor:Florologium
 rsync -p ~/Florologium/timepoint_timelapse_hires.R flor:Florologium
 rsync -p ~/Florologium/day_timelapse_hires.R flor:Florologium
+rsync -p ~/Florologium/haarcascade_frontalface_default.xml flor:Florologium
 rsync -p ~/Florologium/make_timelapse.py flor:Florologium
+rsync -p ~/Florologium/face_finder.py flor:Florologium
 rsync -p ~/Florologium/create_hires_timelapse.sh flor:Florologium
 rsync -p ~/Florologium/missing.R flor:Florologium
 rsync -p ~/Florologium/floro_rotazoom.py flor:Florologium

@@ -33,3 +33,5 @@ Florologium/title_generator.py florologium_hires_2022-09-05 100 end "www.florolo
 ffmpeg -y -hide_banner -loglevel panic -framerate 5 -pattern_type glob -i 'florologium_hires_2022-09-05/*.jpg' -s 2048x1080 -c:v libx264 -strict -2 -pix_fmt yuv420p -f mp4 timelapse2K/florologium_hires_2022-09-05.mp4
 
 ffmpeg -y -f concat -safe 0 -i Florologium/vidlist.txt -c copy timelapse2k.mp4
+
+# ffmpeg -y -hide_banner -loglevel panic -framerate 1 -pattern_type glob -i 'samples_hires/*.jpg' -s 2048x1080 -c:v libx264 -strict -2 -pix_fmt yuv420p -f mp4 florologium_faces.mp4
