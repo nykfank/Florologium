@@ -2,13 +2,14 @@
 # sudo pip3 install face_recognition
 
 import sys, face_recognition, os, shutil
-indir = '/home/nyk/nikon_696x464'
+#indir = '/home/nyk/nikon_696x464'
+indir = '/home/nyk/nikon_348x232'
 outdir = 'nikon_faces'
 if not os.path.isdir(outdir): os.mkdir(outdir)
 
 def face_detect(imgpath):
     image = face_recognition.load_image_file(imgpath)
-    faces = face_recognition.face_locations(image)
+    faces = face_recognition.face_locations(image, number_of_times_to_upsample=2, model="cnn")
     return len(faces)
 
 for f in sorted(os.listdir(indir)):
