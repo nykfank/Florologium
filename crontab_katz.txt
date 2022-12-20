@@ -4,3 +4,4 @@
 */30 * * * *    /home/pi/boga/wan_update.sh
 */15 * * * *	/home/pi/boga/run_missing.sh
 00 12 * * *	/home/pi/boga/cutout_archive.sh
+*/5 * * * *	temp_bricklet.py

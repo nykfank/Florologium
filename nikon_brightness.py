@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import cv2, os
-foto_dir = '/home/nyk/nikon_696x464'
-outfilename = '/home/nyk/brightness.txt'
+foto_dir = '/mnt/big/katzidien_backup/var/www/florologium/nikon'
+outfilename = '/home/nyk/Florologium/brightness.txt'
 filed = {}
 if os.path.isfile(outfilename):
 	for i in open(outfilename).readlines():

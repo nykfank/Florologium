@@ -1,7 +1,7 @@
 args <- commandArgs(trailingOnly=TRUE)
 sel_hour <- as.integer(args[1]) # 16 was first tested.
-movie_seconds <- 60
-fps <- 20
+movie_seconds <- 15
+fps <- 25
 photo_interval_seconds <- 5
 nb_imgs <- movie_seconds * fps
 indir <- '/home/nyk/backup_nikon'
@@ -9,7 +9,7 @@ outdir <- sprintf('/home/nyk/florologium_hires_%d', sel_hour)
 vidfile <- sprintf('/home/nyk/florologium_hires_%d.mp4', sel_hour)
 if (!dir.exists(outdir)) dir.create(outdir) else for (f in list.files(outdir)) unlink(sprintf("%s/%s", outdir, f))
 # Loading brighness values for photos
-br <- read.table("/home/nyk/brightness.txt", stringsAsFactors=FALSE)
+br <- read.table("/home/nyk/Florologium/brightness.txt", stringsAsFactors=FALSE)
 colnames(br) <- c("filename", "brightness")
 br$timestamp <- strptime(br$filename, "%Y%m%d_%H%M%S")
 br$date <- as.Date(br$timestamp)

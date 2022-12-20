@@ -1,13 +1,13 @@
 args <- commandArgs(trailingOnly=TRUE)
 sel_day <- args[1]
-if (interactive()) sel_day <- "2022-08-03"
+if (interactive()) sel_day <- "2022-06-18"
 fps <- 5
-indir <- '/home/nyk/backup_nikon'
+indir <- '/mnt/big/katzidien_backup/var/www/florologium/nikon'
 outdir <- sprintf('/home/nyk/florologium_hires_%s', sel_day)
 vidfile <- sprintf('/home/nyk/florologium_hires_%s.mp4', sel_day)
 if (!dir.exists(outdir)) dir.create(outdir) else for (f in list.files(outdir)) unlink(sprintf("%s/%s", outdir, f))
 # Loading brighness values for photos
-br <- read.table("/home/nyk/brightness.txt", stringsAsFactors=FALSE)
+br <- read.table("/home/nyk/Florologium/brightness.txt", stringsAsFactors=FALSE)
 colnames(br) <- c("filename", "brightness")
 br$timestamp <- strptime(br$filename, "%Y%m%d_%H%M%S")
 br <- br[order(br$timestamp),]
