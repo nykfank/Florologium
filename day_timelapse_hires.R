@@ -2,16 +2,9 @@ args <- commandArgs(trailingOnly=TRUE)
 sel_day <- args[1]
 if (interactive()) sel_day <- "2022-06-18"
 fps <- 5
-<<<<<<< HEAD
 indir <- '/mnt/big/katzidien_backup/var/www/florologium/nikon'
 outdir <- sprintf('/home/nyk/florologium_hires_%s', sel_day)
 vidfile <- sprintf('/home/nyk/florologium_hires_%s.mp4', sel_day)
-=======
-indir <- '/home/nyk/backup_nikon'
-outdir <- sprintf('florologium_hires_%s', sel_day)
-vidfile <- sprintf('timelapse2K/florologium_hires_%s.mp4', sel_day)
-if (!dir.exists('timelapse2K')) dir.create('timelapse2K') else for (f in list.files(outdir)) unlink(sprintf("%s/%s", outdir, f))
->>>>>>> ffd7d4919a13f542955141fe751414a80d648550
 if (!dir.exists(outdir)) dir.create(outdir) else for (f in list.files(outdir)) unlink(sprintf("%s/%s", outdir, f))
 # Loading brighness values for photos
 br <- read.table("/home/nyk/Florologium/brightness.txt", stringsAsFactors=FALSE)

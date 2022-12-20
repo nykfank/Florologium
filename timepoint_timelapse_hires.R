@@ -1,14 +1,7 @@
 args <- commandArgs(trailingOnly=TRUE)
-<<<<<<< HEAD
 sel_hour <- as.integer(args[1]) # 16 was first tested.
 movie_seconds <- 15
 fps <- 25
-=======
-sel_hour <- as.integer(args[1])
-select_only <- as.integer(args[2])
-movie_seconds <- 60
-fps <- 20
->>>>>>> ffd7d4919a13f542955141fe751414a80d648550
 photo_interval_seconds <- 5
 nb_imgs <- movie_seconds * fps
 indir <- '/home/nyk/backup_nikon'
