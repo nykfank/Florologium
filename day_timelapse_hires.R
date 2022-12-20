@@ -2,9 +2,16 @@ args <- commandArgs(trailingOnly=TRUE)
 sel_day <- args[1]
 if (interactive()) sel_day <- "2022-06-18"
 fps <- 5
+<<<<<<< HEAD
 indir <- '/mnt/big/katzidien_backup/var/www/florologium/nikon'
 outdir <- sprintf('/home/nyk/florologium_hires_%s', sel_day)
 vidfile <- sprintf('/home/nyk/florologium_hires_%s.mp4', sel_day)
+=======
+indir <- '/home/nyk/backup_nikon'
+outdir <- sprintf('florologium_hires_%s', sel_day)
+vidfile <- sprintf('timelapse2K/florologium_hires_%s.mp4', sel_day)
+if (!dir.exists('timelapse2K')) dir.create('timelapse2K') else for (f in list.files(outdir)) unlink(sprintf("%s/%s", outdir, f))
+>>>>>>> ffd7d4919a13f542955141fe751414a80d648550
 if (!dir.exists(outdir)) dir.create(outdir) else for (f in list.files(outdir)) unlink(sprintf("%s/%s", outdir, f))
 # Loading brighness values for photos
 br <- read.table("/home/nyk/Florologium/brightness.txt", stringsAsFactors=FALSE)
@@ -28,10 +35,7 @@ for (i in 1:nrow(subr)) {
 	f <- subr[i, "filename"]
 	fn1 <- sprintf("%s/%s", indir, f)
 	fn2 <- sprintf("%s/%s", outdir, f)
-	if (!file.exists(fn1)) {
-		writeLines(sprintf("%s does not exists!", fn1))
-		next
-	}
+	if (!file.exists(fn1)) next
 	setTxtProgressBar(pb, i)
 	file.copy(fn1, fn2)
 	zeit <- strftime(subr[i, "timestamp"], "%Y-%m-%d %H:%M")
@@ -39,12 +43,13 @@ for (i in 1:nrow(subr)) {
 	system(cmd)
 }
 close(pb)
+
 # Use a resolution of 3840 x 2160 (the 4K norm), not the full 5568x3712 of the camera, otherwise it'll be a huge video file.
 # Better use 2048x1080 (2K video), my laptop is too slow to play 4K!
-cmd <- sprintf("ffmpeg -y -hide_banner -loglevel panic -framerate %d -pattern_type glob -i '%s/*.jpg' -s 2048x1080 -c:v libx264 -strict -2 -pix_fmt yuv420p -f mp4 %s", 
-	fps, outdir, vidfile)
-writeLines(cmd)
-system(cmd)
+#cmd <- sprintf("ffmpeg -y -hide_banner -loglevel panic -framerate %d -pattern_type glob -i '%s/*.jpg' -s 2048x1080 -c:v libx264 -strict -2 -pix_fmt yuv420p -f mp4 %s", 
+#	fps, outdir, vidfile)
+#writeLines(cmd)
+#system(cmd)
 
 # datab <- as.data.frame(table(br$date))
 # datab$date <- gsub("2022-", "", as.character(datab$Var1))
