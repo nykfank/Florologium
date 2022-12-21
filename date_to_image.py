@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+# Install debian package: ttf-mscorefonts-installer
 import PIL.Image,os,sys,time
 
 def load_font(fontSize):

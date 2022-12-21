@@ -1,10 +1,13 @@
 args <- commandArgs(trailingOnly=TRUE)
 sel_hour <- as.integer(args[1]) # 16 was first tested.
+select_only <- as.integer(args[2])
+if (interactive()) sel_hour <- 7
+if (interactive()) select_only <- 1
 movie_seconds <- 15
 fps <- 25
 photo_interval_seconds <- 5
 nb_imgs <- movie_seconds * fps
-indir <- '/home/nyk/backup_nikon'
+indir <- '/mnt/big/katzidien_backup/var/www/florologium/nikon'
 outdir <- sprintf('florologium_hires_%d', sel_hour)
 vidfile <- sprintf('timelapse2K/florologium_hires_%d.mp4', sel_hour)
 if (!dir.exists('timelapse2K')) dir.create('timelapse2K') else for (f in list.files(outdir)) unlink(sprintf("%s/%s", outdir, f))
@@ -39,15 +42,16 @@ for (i in 1:nrow(subbr2)) {
 	zeit <- strftime(subbr2[i, "timestamp"], "%Y-%m-%d %H:%M")
 	if (select_only == 1) {
 		cmd <- sprintf('/home/nyk/Florologium/date_to_image.py %s "%s"', fn2, zeit)
+		#writeLines(cmd)
 		system(cmd)
 	}
 }
 close(pb)
 # Use a resolution of 3840 x 2160 (the 4K norm), not the full 5568x3712 of the camera, otherwise it'll be a huge video file.
 # Better use 2048x1080 (2K video), my laptop is too slow to play 4K!
-#if (select_only == 1) {
-#	cmd <- sprintf("ffmpeg -y -hide_banner -loglevel panic -framerate %d -pattern_type glob -i '%s/*.jpg' -s 2048x1080 -c:v libx264 -strict -2 -pix_fmt yuv420p -f mp4 %s", 
-#		fps, outdir, vidfile)
-#	writeLines(cmd)
-#	system(cmd)
-#}
+if (select_only == 1) {
+	cmd <- sprintf("ffmpeg -y -hide_banner -loglevel panic -framerate %d -pattern_type glob -i '%s/*.jpg' -s 2048x1080 -c:v libx264 -strict -2 -pix_fmt yuv420p -f mp4 %s", 
+		fps, outdir, vidfile)
+	writeLines(cmd)
+	system(cmd)
+}
