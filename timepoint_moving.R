@@ -17,7 +17,6 @@ br <- br[br$date < as.Date("2022-09-24"),]
 br <- br[order(br$timestamp),]
 nb_days <- length(unique(br$date))
 img_per_day <- nb_imgs / nb_days
-packsize <- round(nrow(br) / nb_imgs)
 hourvec <- rep(0:23, each=nb_days/24)
 if (length(hourvec) < nb_days) hourvec <- c(hourvec, rep(23, nb_days - length(hourvec)))
 if (length(hourvec) > nb_days) hourvec <- hourvec[1:nb_days]
