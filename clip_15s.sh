@@ -8,3 +8,7 @@ ffmpeg -y -hide_banner -loglevel panic -framerate 25 -pattern_type glob -i 'flor
 
 
 ffmpeg -y -hide_banner -loglevel panic -framerate 25 -pattern_type glob -i 'florologium_hires_moving_median3/*.jpg' -s 2048x1080 -c:v libx264 -strict -2 -pix_fmt yuv420p -f mp4 florologium_hires_moving_m3.mp4
+
+# Video Stabilisation (not looking nice here)
+fmpeg -i florologium_hires_moving.mp4 -vf vidstabdetect -f null -
+ffmpeg -i florologium_hires_moving.mp4 -vf vidstabtransform florologium_hires_moving_stab.mp4
