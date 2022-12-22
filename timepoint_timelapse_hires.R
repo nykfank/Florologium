@@ -3,14 +3,13 @@ sel_hour <- as.integer(args[1]) # 16 was first tested.
 select_only <- as.integer(args[2])
 if (interactive()) sel_hour <- 7
 if (interactive()) select_only <- 1
-movie_seconds <- 15
+movie_seconds <- 10
 fps <- 25
 photo_interval_seconds <- 5
 nb_imgs <- movie_seconds * fps
 indir <- '/mnt/big/katzidien_backup/var/www/florologium/nikon'
 outdir <- sprintf('florologium_hires_%d', sel_hour)
-vidfile <- sprintf('timelapse2K/florologium_hires_%d.mp4', sel_hour)
-if (!dir.exists('timelapse2K')) dir.create('timelapse2K') else for (f in list.files(outdir)) unlink(sprintf("%s/%s", outdir, f))
+vidfile <- sprintf('florologium_hires_%d.mp4', sel_hour)
 if (!dir.exists(outdir)) dir.create(outdir) else for (f in list.files(outdir)) unlink(sprintf("%s/%s", outdir, f))
 # Loading brighness values for photos
 br <- read.table("/home/nyk/Florologium/brightness.txt", stringsAsFactors=FALSE)
