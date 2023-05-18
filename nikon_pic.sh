@@ -2,9 +2,9 @@
 
 current_hour=$(date +%H) # get current hour in 24-hour format
 
-if (( current_hour >= 8 && current_hour < 17 )); then
-    exit 0 # Only take pictures when the greenhouse is closed to the public to avoid taking pictures of people.
-fi
+#if (( current_hour >= 8 && current_hour < 17 )); then
+#    exit 0 # Only take pictures when the greenhouse is closed to the public to avoid taking pictures of people.
+#fi
 
 filename="$(date +"%Y%m%d_%H%M%S").jpg"
 ssh flortun "test -e capt0000.jpg"
@@ -32,7 +32,7 @@ then
 	exit
 fi
 
-convert -geometry 696x464 /var/www/box/$filename /var/www/box/current.jpg
+convert -geometry 1044x696 /var/www/box/$filename /var/www/current_box.jpg
 
 #ssh flor "test -e nikon_current.jpg"
 #if [[ $? -eq 0 ]]; 
