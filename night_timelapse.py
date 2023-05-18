@@ -1,12 +1,15 @@
 #!/usr/bin/python3
+# TODO: Use date for filename, then symlink to current video.
 indir = '/var/www/box'
 outdir = '/tmp/box_1044x696'
-vidfile = '/var/www/box_timelapse.mp4'
+
 fps = 5
 nb_hours = 24
 
-import PIL.Image,os,sys,time, shutil
+import PIL.Image,os,sys,time, shutil, datetime
 
+vidfile = '/var/www/box/box_timelapse_%s.mp4' % datetime.date.today()
+vidfile2 = '/var/www/box_timelapse.mp4'
 def load_font(fontSize):
  """Load the arial TTF font from the default location for gentoo and debian linux"""
  import PIL.ImageFont
@@ -47,3 +50,4 @@ for f in selected_files:
 cmd = "ffmpeg -y -hide_banner -loglevel panic -framerate %d -pattern_type glob -i '%s/*.jpg' -s 1044x696 -c:v libx264 -strict -2 -pix_fmt yuv420p -f mp4 %s" % (fps, outdir, vidfile)
 print(cmd)
 r = os.popen(cmd)
+os.symlink(vidfile, vidfile2)
