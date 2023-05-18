@@ -50,4 +50,5 @@ for f in selected_files:
 cmd = "ffmpeg -y -hide_banner -loglevel panic -framerate %d -pattern_type glob -i '%s/*.jpg' -s 1044x696 -c:v libx264 -strict -2 -pix_fmt yuv420p -f mp4 %s" % (fps, outdir, vidfile)
 print(cmd)
 r = os.popen(cmd)
+os.unlink(vidfile2)
 os.symlink(vidfile, vidfile2)
